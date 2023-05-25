@@ -57,6 +57,15 @@ app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,res
 })
 
 ////////////////////////////////////////////////gg
+app.post('/v1/educ_four/postNeighborhood', cors(), bodyJson, async function (request,response){
+   let contentType = request.headers['content-type'];
+   let dadosBody = request.body;
+   let resultInsertNeighborhood = await controllerEducFour.inserirBairro(dadosBody)
+   response.json(resultInsertNeighborhood)
+   
+})
+
+
 app.post('/v1/educ_four/postadm', cors(), bodyJson, async function (request,response){
    let contentType = request.headers['content-type'];
    let dadosBody = request.body;

@@ -36,13 +36,11 @@ let sql =`insert into tbl_administrador
 }
 
 
-const insert_address = async(dadosAddress) => {
-    let sql =`insert into bl_endereco
-    (nome,email,senha)
+const insertNeighborhood = async(dadosneighborhood) => {
+    let sql =`insert into tbl_bairro
+    (nome)
         values
-        ('${dadosAdm.nome}',
-        '${dadosAdm.email}',
-        '${dadosAdm.senha}'
+        ('${dadosneighborhood.nome}'
           ) `;
           let rsAdm = await prisma.$queryRawUnsafe(sql)
           console.log(sql)
@@ -104,5 +102,6 @@ module.exports = {
     selectAllAdm,
     selectAllNews,
     insertNews,
-    insertAdm
+    insertAdm,
+    insertNeighborhood
 }

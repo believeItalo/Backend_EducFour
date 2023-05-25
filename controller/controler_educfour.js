@@ -16,6 +16,10 @@ const inserirAdm = async (dadosAdm) => {
     let status = await educ_DAO.insertAdm(dadosAdm)
  
 }
+
+const inserirBairro = async (dadosBairo) => {
+    let status = await educ_DAO.insertNeighborhood(dadosBairo)
+}
 /////////////////////////////////GG
 
 const selecionarTodasAsNoticias = async () =>{
@@ -53,5 +57,6 @@ module.exports = {
     selecionarTodososAdms,
     selecionarTodasAsNoticias,
     inserirNoticia,
-    inserirAdm
+    inserirAdm,
+    inserirBairro
 }
