@@ -16,7 +16,21 @@ const selectAllAdm = async () =>{
     }
 }
 
-module.exports = {
+const selectAllNews = async () =>{
 
-    selectAllAdm
+    let sql = 'select * from tbl_noticias;'
+    let rsNews = await prisma.$queryRawUnsafe(sql)
+
+    if(rsNews.length > 0){
+        return rsNews
+    }
+    else{
+
+        return false
+    }
+}
+
+module.exports = {
+    selectAllAdm,
+    selectAllNews
 }

@@ -36,6 +36,17 @@ app.get('/v1/educ_four/adms', cors(), async function (request,response){
    
 })
 
+app.get('/v1/educ_four/news', cors(), async function (request,response){
+   
+   let dados = await controllerEducFour.selecionarTodasAsNoticias()
+
+   response.status(200)
+   response.json(dados)
+
+   console.log(dados);
+   console.log('teste');
+})
+
 
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')

@@ -12,6 +12,17 @@ const selecionarTodososAdms = async() =>{
     return dadosJSon
 }
 
+const selecionarTodasAsNoticias = async () =>{
+
+   let dadosNews = await educ_DAO.selectAllNews()
+   let dadosJSon = {}
+
+   dadosJSon.news = dadosNews
+
+   return dadosJSon
+
+}
 module.exports = {
-    selecionarTodososAdms
+    selecionarTodososAdms,
+    selecionarTodasAsNoticias
 }
