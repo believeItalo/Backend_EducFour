@@ -23,18 +23,18 @@ const bodyJson = bodyParser.json();
 var controllerEducFour = require('./controller/controler_educfour')
 var messages_EducFour = require('./controller/modulo/config')
 
-app.get('/v1/educ_four/adms', cors(), async function (request,response){
+// app.get('/v1/educ_four/adms', cors(), async function (request,response){
 
-   let dados = await controllerEducFour.selecionarTodososAdms()
+//    let dados = await controllerEducFour.selecionarTodososAdms()
 
-   response.status(200)
-   response.json(dados)
+//    response.status(200)
+//    response.json(dados)
 
-   console.log(dados);
-   console.log('teste');
+//    console.log(dados);
+//    console.log('teste');
    
    
-})
+// })
 
 app.get('/v1/educ_four/news', cors(), async function (request,response){
    
@@ -47,6 +47,14 @@ app.get('/v1/educ_four/news', cors(), async function (request,response){
    console.log('teste');
 })
 
+app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,response){
+   let contentType = request.headers['content-type'];
+   let dadosBody = request.body;
+   let resultInsertNews = await controllerEducFour.inserirNoticia(dadosBody)
+   response.json(resultInsertNews)
+   console.log(dadosBody);
+   
+})
 
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')

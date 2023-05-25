@@ -20,9 +20,22 @@ const selecionarTodasAsNoticias = async () =>{
    dadosJSon.news = dadosNews
 
    return dadosJSon
+}
+
+const inserirNoticia = async function (dadosNews){
+
+    // if (dadosNoticia.titulo == ' '|| dadosNoticia.titulo == undefined || dadosNoticia.titulo.length > 45) {
+        
+    // }
+
+    let status = await educ_DAO.insertNews(dadosNews)
+
+   
+    
 
 }
 module.exports = {
     selecionarTodososAdms,
-    selecionarTodasAsNoticias
+    selecionarTodasAsNoticias,
+    inserirNoticia
 }
