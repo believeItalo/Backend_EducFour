@@ -1,3 +1,11 @@
+/********************************************************************************
+ * Objetivo: API pra interagir com banco de dados (GET, POST, DELTE, PUT) EDUCFOUR
+ * Data: 25/05/2023 INICIO
+ * Autor: Italoo, Paula
+ * Versão: 1.0
+ * **********************************************************/
+
+ //Import das dependências para criar a API
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser');
@@ -47,6 +55,30 @@ app.get('/v1/educ_four/news', cors(), async function (request,response){
    console.log('teste');
 })
 
+
+//EndPoint: retornar
+app.get('/v1/educ_four/calendario', cors(), async function (request,response){
+   
+   let dados = await controllerEducFour.selecionarAulas()
+
+   response.status(200)
+   response.json(dados)
+
+   console.log(dados);
+   console.log('teste');
+});
+
+
+app.get('/v1/educ_four/calendario/aulas', cors(), async function (request,response){
+   
+   let dados = await controllerEducFour.selecionarTodasAsNoticias()
+
+   response.status(200)
+   response.json(dados)
+
+   console.log(dados);
+   console.log('teste');
+})
 
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')

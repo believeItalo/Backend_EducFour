@@ -30,7 +30,23 @@ const selectAllNews = async () =>{
     }
 }
 
+//retorna um registro filtrado do banco de dados
+const selectAllcalendar = async () =>{
+
+    let sql = 'select * from  tbl_aulas;'
+    let rsNews = await prisma.$queryRawUnsafe(sql)
+
+    if(rsNews.length > 0){
+        return rsNews
+    }
+    else{
+
+        return false
+    }
+}
+
 module.exports = {
     selectAllAdm,
-    selectAllNews
+    selectAllNews,
+    selectAllcalendar
 }
