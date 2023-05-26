@@ -23,7 +23,7 @@ let sql =`insert into tbl_administrador
     ('${dadosAdm.nome}',
     '${dadosAdm.email}',
     '${dadosAdm.senha}'
-      ) `;
+      ) ;`;
       let rsAdm = await prisma.$queryRawUnsafe(sql)
       console.log(sql)
      
@@ -52,6 +52,9 @@ const insertNeighborhood = async(dadosneighborhood) => {
              return false;
           }
     }
+
+
+
 ///////////////GG
 
 const selectAllNews = async () => {
@@ -82,7 +85,7 @@ const insertNews = async (dadosNews) => {
           ) `;
         
     let rsNews = await prisma.$queryRawUnsafe(sql)
-    console.log(sql)
+   
    
     if(rsNews) {
         return true;
