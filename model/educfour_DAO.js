@@ -15,6 +15,44 @@ const selectAllAdm = async () => {
         return false
     }
 }
+ //////////////////// GG
+const insertAdm = async(dadosAdm) => {
+let sql =`insert into tbl_administrador
+(nome,email,senha)
+    values
+    ('${dadosAdm.nome}',
+    '${dadosAdm.email}',
+    '${dadosAdm.senha}'
+      ) `;
+      let rsAdm = await prisma.$queryRawUnsafe(sql)
+      console.log(sql)
+     
+      if(rsAdm) {
+          return true;
+      }
+      else{
+         return false;
+      }
+}
+
+
+const insertNeighborhood = async(dadosneighborhood) => {
+    let sql =`insert into tbl_bairro
+    (nome)
+        values
+        ('${dadosneighborhood.nome}'
+          ) `;
+          let rsAdm = await prisma.$queryRawUnsafe(sql)
+          console.log(sql)
+         
+          if(rsAdm) {
+              return true;
+          }
+          else{
+             return false;
+          }
+    }
+///////////////GG
 
 const selectAllNews = async () => {
 
@@ -63,5 +101,7 @@ const insertNews = async (dadosNews) => {
 module.exports = {
     selectAllAdm,
     selectAllNews,
-    insertNews
+    insertNews,
+    insertAdm,
+    insertNeighborhood
 }

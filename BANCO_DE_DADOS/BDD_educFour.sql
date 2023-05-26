@@ -1,5 +1,6 @@
 create database educ_four_database;
 use educ_four_database;
+show databases;
 create table tbl_sexo(
 id int not null auto_increment primary key,
 nome varchar(30) not null,
@@ -136,3 +137,10 @@ unique index (id)
 
 );
 show tables;
+select * from tbl_administrador;
+select * from tbl_bairro;
+select * from tbl_noticias; 
+show create table tbl_noticias; 
+select * from tbl_noticias;
+
+
