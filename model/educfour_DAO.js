@@ -16,24 +16,24 @@ const selectAllAdm = async () => {
     }
 }
  //////////////////// GG
-const insertAdm = async(dadosAdm) => {
-let sql =`insert into tbl_administrador
-(nome,email,senha)
-    values
-    ('${dadosAdm.nome}',
-    '${dadosAdm.email}',
-    '${dadosAdm.senha}'
-      ) `;
-      let rsAdm = await prisma.$queryRawUnsafe(sql)
-      console.log(sql)
-     
-      if(rsAdm) {
-          return true;
-      }
-      else{
-         return false;
-      }
-}
+ const insertAdm = async(dadosAdm) => {
+    let sql =`insert into tbl_administrador
+    (nome,email,senha)
+        values
+        ('${dadosAdm.nome}',
+        '${dadosAdm.email}',
+        '${dadosAdm.senha}'
+          ) ;`;
+          let rsAdm = await prisma.$queryRawUnsafe(sql)
+         
+          if(rsAdm) {
+              return true;
+          }
+          else{
+             return false;
+          }
+    }
+    
 
 
 const insertNeighborhood = async(dadosneighborhood) => {
@@ -43,7 +43,7 @@ const insertNeighborhood = async(dadosneighborhood) => {
         ('${dadosneighborhood.nome}'
           ) `;
           let rsAdm = await prisma.$queryRawUnsafe(sql)
-          console.log(sql)
+     
          
           if(rsAdm) {
               return true;

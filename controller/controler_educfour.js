@@ -2,20 +2,18 @@ const {response} = require('express')
 const educ_DAO = require('../model/educfour_DAO')
 const message = require('./modulo/config')
 
-// const selecionarTodososAdms = async() =>{
-
-//     let dadodsAdm = await educ_DAO.selectAllAdm()
-
-//     let dadosJSon = {}
-
-//     dadosJSon.adms = dadodsAdm
-
-//     return dadosJSon
-// }
-////////////////////////GG
 const inserirAdm = async (dadosAdm) => {
-    let status = await educ_DAO.insertAdm(dadosAdm)
- 
+    if (dadosAdm.nome == ' ' || dadosAdm.nome == undefined || dadosAdm.nome.length > 45 ||
+        dadosAdm.email == ' ' || dadosAdm.email == undefined || dadosAdm.email.length > 90 ||
+        dadosAdm.senha == ' ' || dadosAdm.senha == undefined || dadosAdm.senha.length > 45
+    ) {
+        return message.ERROR_REQUIRED_DATA
+    } else {
+        let status = await educ_DAO.insertAdm(dadosAdm)
+        return message.CREATED_ITEM
+    }
+
+
 }
 
 const inserirBairro = async (dadosBairo) => {
