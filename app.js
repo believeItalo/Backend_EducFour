@@ -59,9 +59,18 @@ app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request, re
 ////////////////////////////////////////////////gg
 app.post('/v1/educ_four/postNeighborhood', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
-   let dadosBody = request.body;
-   let resultInsertNeighborhood = await controllerEducFour.inserirBairro(dadosBody)
-   response.json(resultInsertNeighborhood)
+
+
+   if (String(contentType).toLowerCase() == 'application/json') {
+      let dadosBody = request.body;
+      let resultInsertNeighborhood = await controllerEducFour.inserirBairro(dadosBody)
+      response.status(resultInsertNeighborhood.status)
+      response.json(resultInsertNeighborhood)
+     
+   }else {
+      response.status(messages.ERROR_INVALID_CONTENT_TYPE.status)
+      response.json(messages.ERROR_INVALID_CONTENT_TYPE)
+   }
 
 })
 
@@ -83,7 +92,14 @@ app.post('/v1/educ_four/postadm', cors(), bodyJson, async function (request, res
 
 })
 
+app.get('/v1/educ_four/postadm/:id', cors(), bodyJson, async function (request, response) {
 
+   let idAdm = request.params.id
+
+   let dados = await controllerEducFour.buscarIdAdm(idAdm)
+   response.status(dados.status)
+response.json(dados) 
+})
 //////////////////////////////////////////////gg
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')

@@ -53,7 +53,18 @@ const insertNeighborhood = async(dadosneighborhood) => {
           }
     }
 
+const selectIdAdm = async function (id) {
+    let sql = `select * from tbl_administrador where id = ${id}`;
 
+    let rsAdm = await prisma.$queryRawUnsafe(sql); // método que execulta script dentro do banco, coloco a variavel -> unsafe interpratar várivale, fazer select no banco
+    if (rsAdm.length > 0) {
+        return rsAdm
+    }
+    else {
+
+        return false
+    }
+}
 
 ///////////////GG
 
@@ -106,5 +117,6 @@ module.exports = {
     selectAllNews,
     insertNews,
     insertAdm,
-    insertNeighborhood
+    insertNeighborhood,
+    selectIdAdm
 }

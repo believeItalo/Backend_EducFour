@@ -27,8 +27,28 @@ const inserirAdm = async (dadosAdm) => {
 }
 
 const inserirBairro = async (dadosBairo) => {
+    if (dadosBairo.nome == ' ' || dadosBairo.nome == undefined || dadosBairo.nome.length > 55 ){
+        return messages.ERROR_REQUIRED_DATA
+}else {
 
     let status = await educ_DAO.insertNeighborhood(dadosBairo)
+    return messages.CREATED_ITEM
+}
+    
+}
+
+
+const buscarIdAdm = async function (id) {
+
+    let dadosAdm = await educ_DAO.selectIdAdm(id)
+    let dadosJson = {}
+
+   
+        dadosJson.status = 200
+
+        dadosJson.adm = dadosAdm
+        return dadosJson
+    
 }
 /////////////////////////////////GG
 
@@ -68,5 +88,6 @@ module.exports = {
     selecionarTodasAsNoticias,
     inserirNoticia,
     inserirAdm,
-    inserirBairro
+    inserirBairro,
+    buscarIdAdm
 }
