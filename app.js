@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const { request, response } = require('express');
-
+const message = require('./controller/modulo/config')
 
 const app = express();
 
@@ -21,7 +21,6 @@ app.use((request, response, next) => {
 const bodyJson = bodyParser.json();
 
 var controllerEducFour = require('./controller/controler_educfour')
-var messages_EducFour = require('./controller/modulo/config')
 
 // app.get('/v1/educ_four/adms', cors(), async function (request,response){
 
@@ -49,10 +48,19 @@ app.get('/v1/educ_four/news', cors(), async function (request,response){
 
 app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,response){
    let contentType = request.headers['content-type'];
-   let dadosBody = request.body;
-   let resultInsertNews = await controllerEducFour.inserirNoticia(dadosBody)
-   response.json(resultInsertNews)
-   console.log(dadosBody);
+   if(String(contentType).toLowerCase() == 'application/json'){
+
+      let dadosBody = request.body;
+      let resultInsertNews = await controllerEducFour.inserirNoticia(dadosBody)
+      response.status(resultInsertNews.status)
+      response.json(resultInsertNews)
+      console.log(dadosBody);
+      
+   }
+   else{
+      response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+      response.json(message.ERROR_INVALID_CONTENT_TYPE)
+   }
    
 })
 

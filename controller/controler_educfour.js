@@ -1,16 +1,17 @@
 const {response} = require('express')
 const educ_DAO = require('../model/educfour_DAO')
+const message = require('./modulo/config')
 
-const selecionarTodososAdms = async() =>{
+// const selecionarTodososAdms = async() =>{
 
-    let dadodsAdm = await educ_DAO.selectAllAdm()
+//     let dadodsAdm = await educ_DAO.selectAllAdm()
 
-    let dadosJSon = {}
+//     let dadosJSon = {}
 
-    dadosJSon.adms = dadodsAdm
+//     dadosJSon.adms = dadodsAdm
 
-    return dadosJSon
-}
+//     return dadosJSon
+// }
 ////////////////////////GG
 const inserirAdm = async (dadosAdm) => {
     let status = await educ_DAO.insertAdm(dadosAdm)
@@ -42,21 +43,27 @@ const selecionarTodasAsNoticias = async () =>{
 }
 
 const inserirNoticia = async function (dadosNews){
-
-    // if (dadosNoticia.titulo == ' '|| dadosNoticia.titulo == undefined || dadosNoticia.titulo.length > 45) {
-        
-    // }
-
-    let status = await educ_DAO.insertNews(dadosNews)
-
-   
     
+    if(dadosNews.titulo == ''|| dadosNews.titulo == undefined || dadosNews.titulo.length > 45||
+       dadosNews.nome_autor == ''|| dadosNews.nome_autor == undefined || dadosNews.nome_autor > 90 ||
+       dadosNews.descricao == ''|| dadosNews.descricao == undefined || dadosNews.descricao > 100 ||
+       dadosNews.capa_noticia == ' ' || dadosNews.capa_noticia == undefined || dadosNews.capa_noticia > 45||
+       dadosNews.tema == ' '|| dadosNews.tema == undefined || dadosNews.tema > 45||
+       dadosNews.data_noticia == ' ' || dadosNews.data_noticia == undefined || dadosNews.data_noticia > 45
+    ){
+        
+        return message.ERROR_REQUIRED_DATA
+    }
+    else{
+        let status = await educ_DAO.insertNews(dadosNews)
 
+        return message.CREATED_ITEM
+    }
 }
 module.exports = {
-    selecionarTodososAdms,
     selecionarTodasAsNoticias,
     inserirNoticia,
     inserirAdm,
     inserirBairro
 }
+

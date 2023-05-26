@@ -69,6 +69,7 @@ const selectAllNews = async () => {
 }
 
 const insertNews = async (dadosNews) => {
+    
 
     let sql = `insert into tbl_noticias 
     (titulo,nome_autor,descricao,capa_noticia,tema,data_noticia)
@@ -82,7 +83,6 @@ const insertNews = async (dadosNews) => {
           ) `;
         
     let rsNews = await prisma.$queryRawUnsafe(sql)
-    console.log(sql)
    
     if(rsNews) {
         return true;
