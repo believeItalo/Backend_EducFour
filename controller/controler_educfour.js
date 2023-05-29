@@ -88,6 +88,21 @@ const inserirNoticia = async function (dadosNews) {
     }
 }
 
+const deletarNoticia = async (idNot) => {
+
+    if(idNot == ' '|| idNot == undefined || isNaN(idNot)){
+        return message.ERROR_REQUIRED_ID
+    }
+    else{
+        let status = await educfour_DAO.deleteNews(idNot)
+        if(status){
+            return message.DELETE_ITEM
+        }
+        else{
+            return message.ERROR_INTERNAL_SERVER
+        }
+    }
+}
 //NOTICIAS
 
 //AULAS
@@ -113,7 +128,8 @@ module.exports = {
     inserirAdm,
     selecionarTodososAdms,
     deletarAdm,
-    selecionarTodasAsAulas
+    selecionarTodasAsAulas,
+    deletarNoticia
     // inserirBairro
 }
 

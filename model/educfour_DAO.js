@@ -103,7 +103,20 @@ const insertNews = async (dadosNews) => {
         return false;
     }
 }
+const deleteNews = async function (id) {
+    let sql = `delete from tbl_noticias where id = ${id}`;
 
+    let result = await prisma.$executeRawUnsafe(sql);
+
+    if (result) {
+        return true;
+    }
+    else {
+        return false;
+
+    }
+
+}
 
 //
 
@@ -129,6 +142,7 @@ module.exports = {
     insertNews,
     insertAdm,
     deleteADM,
-    selectAllCLasses
+    selectAllCLasses,
+    deleteNews
    
 }

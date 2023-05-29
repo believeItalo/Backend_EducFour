@@ -50,6 +50,15 @@ app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,res
    }
    
 })
+app.delete('/v1/educ_four/deletenews/:id', cors(), async function (request, response) {
+
+   let idNot = request.params.id 
+   let resultDeleteDados = await controllerEducFour.deletarNoticia(idNot)
+
+   response.status(resultDeleteDados.status)
+   response.json(resultDeleteDados)
+
+})
 //NOTICIAS
 
 
