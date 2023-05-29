@@ -101,7 +101,7 @@ const selecionarTodasAsAulas = async () => {
         dadosJSon.status = 200
         // retorna todos os registros
         dadosJSon.count = dadosClasses.length
-        dadosJSon.news = dadosClasses
+        dadosJSon.aulas = dadosClasses
         return dadosJSon
     } else {
         dadosJSon.status = 404
