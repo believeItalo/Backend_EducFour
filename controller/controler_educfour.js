@@ -48,6 +48,34 @@ const deletarAdm = async (idAdm) => {
         }
     }
 }
+
+const atualizarAdm = async (dadosAdm, idAdm) =>{
+    if (dadosAdm.nome == ' ' || dadosAdm.nome == undefined || dadosAdm.nome.length > 45 ||
+    dadosAdm.email == ' ' || dadosAdm.email == undefined || dadosAdm.email.length > 90 ||
+    dadosAdm.senha == ' ' || dadosAdm.senha == undefined || dadosAdm.senha.length > 45
+) {
+    return message.ERROR_REQUIRED_DATA
+
+} else if(idAdm == '' || idAdm == undefined || isNaN(idAdm)){
+
+    return message.ERROR_REQUIRED_ID
+}else {
+    dadosAdm.id = idAdm
+
+    let status = await educ_DAO.updateAdm(dadosAdm)
+
+    if(status){
+        let dadosJSon = {} 
+
+        dadosJSon.status = message.UPDATED_ITEM.status
+        dadosJSon.adm = dadosAdm
+
+        return dadosJson
+    }
+    else
+        return message.ERROR_INTERNAL_SERVER
+}
+}
 //ADMS
 
 //NOTICIAS
@@ -129,7 +157,8 @@ module.exports = {
     selecionarTodososAdms,
     deletarAdm,
     selecionarTodasAsAulas,
-    deletarNoticia
+    deletarNoticia,
+    atualizarAdm
     // inserirBairro
 }
 

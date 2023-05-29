@@ -46,6 +46,23 @@ const deleteADM = async function (id) {
     }
 
 }
+const updateAdm  = async function(dadosAdm) {
+    let sql = `update  tbl_administrador set
+        nome  = '${dadosAdm.nome}',
+        email = '${dadosAdm.email}',
+        senha = '${dadosAdm.senha}'
+        where id = ${dadosAdm.id} `
+
+    let rsAdm = await prisma.$queryRawUnsafe(sql)
+
+    if (rsAdm) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    
+    }
 
 
 // const insertNeighborhood = async(dadosneighborhood) => {
@@ -143,6 +160,6 @@ module.exports = {
     insertAdm,
     deleteADM,
     selectAllCLasses,
-    deleteNews
-   
+    deleteNews,
+    updateAdm
 }

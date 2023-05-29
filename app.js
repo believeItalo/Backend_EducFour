@@ -108,6 +108,22 @@ app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, respo
 
 })
 
+//PUT ADM
+
+app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {  
+   //recebe os dados do body   
+  let dados = request.body
+
+  //recebe o id do aluno
+  let idAdm = request.params.id
+
+  //encaminhar os dados para serem atualizados
+  let resultUpdateDados = await controllerEducFour.atualizarAdm(dados, idAdm)
+  
+  response.status(resultUpdateDados.status)
+  response.json(resultUpdateDados)
+
+});
 
 //ADMINISTRADORES
 
