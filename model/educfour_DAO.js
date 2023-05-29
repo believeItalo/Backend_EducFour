@@ -102,12 +102,25 @@ const insertNews = async (dadosNews) => {
     else {
         return false;
     }
+}
 
 
+//
 
+//AULAS
 
+const selectAllCLasses = async () => {
 
+    let sql = 'select * from tbl_aulas;'
+    let rsClasses = await prisma.$queryRawUnsafe(sql)
 
+    if (rsClasses.length > 0) {
+        return rsClasses
+    }
+    else {
+
+        return false
+    }
 }
 
 module.exports = {
@@ -115,6 +128,7 @@ module.exports = {
     selectAllNews,
     insertNews,
     insertAdm,
-    deleteADM
+    deleteADM,
+    selectAllCLasses
    
 }

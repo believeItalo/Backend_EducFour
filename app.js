@@ -101,6 +101,16 @@ app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, respo
 
 
 //ADMINISTRADORES
+
+//AULAS
+app.get('/v1/educ_four/getaulas', cors(), bodyJson, async function (request, response) {
+
+   let dados = await controllerEducFour.selecionarTodasAsAulas()
+
+   response.status(200)
+   response.json(dados)
+
+})
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')
 })

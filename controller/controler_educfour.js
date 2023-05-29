@@ -89,12 +89,31 @@ const inserirNoticia = async function (dadosNews) {
 }
 
 //NOTICIAS
+
+//AULAS
+const selecionarTodasAsAulas = async () => {
+
+    let dadosClasses = await educ_DAO.selectAllCLasses()
+    let dadosJSon = {}
+
+    if (dadosClasses) {
+        //retorna dados da requisicao
+        dadosJSon.status = 200
+        // retorna todos os registros
+        dadosJSon.count = dadosClasses.length
+        dadosJSon.news = dadosClasses
+        return dadosJSon
+    } else {
+        dadosJSon.status = 404
+    }
+}
 module.exports = {
     selecionarTodasAsNoticias,
     inserirNoticia,
     inserirAdm,
     selecionarTodososAdms,
-    deletarAdm
+    deletarAdm,
+    selecionarTodasAsAulas
     // inserirBairro
 }
 
