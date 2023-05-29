@@ -15,43 +15,55 @@ const selectAllAdm = async () => {
         return false
     }
 }
- //////////////////// GG
- const insertAdm = async(dadosAdm) => {
-    let sql =`insert into tbl_administrador
+const insertAdm = async (dadosAdm) => {
+    let sql = `insert into tbl_administrador
     (nome,email,senha)
         values
         ('${dadosAdm.nome}',
         '${dadosAdm.email}',
         '${dadosAdm.senha}'
           ) ;`;
-          let rsAdm = await prisma.$queryRawUnsafe(sql)
-         
-          if(rsAdm) {
-              return true;
-          }
-          else{
-             return false;
-          }
+    let rsAdm = await prisma.$queryRawUnsafe(sql)
+
+    if (rsAdm) {
+        return true;
     }
-    
+    else {
+        return false;
+    }
+}
+const deleteADM = async function (id) {
+    let sql = `delete from tbl_administrador where id = ${id}`;
+
+    let result = await prisma.$executeRawUnsafe(sql);
+
+    if (result) {
+        return true;
+    }
+    else {
+        return false;
+
+    }
+
+}
 
 
-const insertNeighborhood = async(dadosneighborhood) => {
-    let sql =`insert into tbl_bairro
-    (nome)
-        values
-        ('${dadosneighborhood.nome}'
-          ) `;
-          let rsAdm = await prisma.$queryRawUnsafe(sql)
-     
-         
-          if(rsAdm) {
-              return true;
-          }
-          else{
-             return false;
-          }
-    }
+// const insertNeighborhood = async(dadosneighborhood) => {
+//     let sql =`insert into tbl_bairro
+//     (nome)
+//         values
+//         ('${dadosneighborhood.nome}'
+//           ) `;
+//           let rsAdm = await prisma.$queryRawUnsafe(sql)
+
+
+//           if(rsAdm) {
+//               return true;
+//           }
+//           else{
+//              return false;
+//           }
+//     }
 ///////////////GG
 
 const selectAllNews = async () => {
@@ -69,7 +81,7 @@ const selectAllNews = async () => {
 }
 
 const insertNews = async (dadosNews) => {
-    
+
 
     let sql = `insert into tbl_noticias 
     (titulo,nome_autor,descricao,capa_noticia,tema,data_noticia)
@@ -81,19 +93,19 @@ const insertNews = async (dadosNews) => {
         '${dadosNews.tema}',
         '${dadosNews.data_noticia}'
           ) `;
-        
+
     let rsNews = await prisma.$queryRawUnsafe(sql)
-   
-    if(rsNews) {
+
+    if (rsNews) {
         return true;
     }
-    else{
-       return false;
+    else {
+        return false;
     }
-    
-    
 
-   
+
+
+
 
 
 }
@@ -103,5 +115,6 @@ module.exports = {
     selectAllNews,
     insertNews,
     insertAdm,
-    insertNeighborhood
+    deleteADM
+   
 }

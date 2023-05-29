@@ -22,8 +22,8 @@ const bodyJson = bodyParser.json();
 
 var controllerEducFour = require('./controller/controler_educfour')
 
+//NOTICIAS
 app.get('/v1/educ_four/news', cors(), async function (request,response){
-   
    let dados = await controllerEducFour.selecionarTodasAsNoticias()
 
    response.status(200)
@@ -50,24 +50,25 @@ app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,res
    }
    
 })
+//NOTICIAS
 
-////////////////////////////////////////////////gg
-app.post('/v1/educ_four/postNeighborhood', cors(), bodyJson, async function (request,response){
-   let contentType = request.headers['content-type'];
-   let dadosBody = request.body;
-   let resultInsertNeighborhood = await controllerEducFour.inserirBairro(dadosBody)
-   response.json(resultInsertNeighborhood)
+
+// app.post('/v1/educ_four/postNeighborhood', cors(), bodyJson, async function (request,response){
+//    let contentType = request.headers['content-type'];
+//    let dadosBody = request.body;
+//    let resultInsertNeighborhood = await controllerEducFour.inserirBairro(dadosBody)
+//    response.json(resultInsertNeighborhood)
    
-})
+// })
 
+//ADMINISTRADORES
 
-
+//POST ADM
 app.post('/v1/educ_four/postadm', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
    if (String(contentType).toLowerCase() == 'application/json') {
       let dadosBody = request.body;
       let resultInsertAdm = await controllerEducFour.inserirAdm(dadosBody)
-      // response.status(resultInsertAdm.status)
       response.status(resultInsertAdm.status)
       response.json(resultInsertAdm)
 
@@ -75,13 +76,31 @@ app.post('/v1/educ_four/postadm', cors(), bodyJson, async function (request, res
       response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
       response.json(message.ERROR_INVALID_CONTENT_TYPE)
    }
+})
 
+//GET ADM
+app.get('/v1/educ_four/getadm', cors(), bodyJson, async function (request, response) {
+
+   let dados = await controllerEducFour.selecionarTodososAdms()
+
+   response.status(200)
+   response.json(dados)
+
+})
+
+//DELETE ADM
+app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, response) {
+
+   let idAdm = request.params.id 
+   let resultDeleteDados = await controllerEducFour.deletarAdm(idAdm)
+
+   response.status(resultDeleteDados.status)
+   response.json(resultDeleteDados)
 
 })
 
 
-
-//////////////////////////////////////////////gg
+//ADMINISTRADORES
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')
 })
