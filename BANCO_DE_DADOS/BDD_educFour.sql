@@ -240,29 +240,15 @@ electronic typesetting, remaining essentially unchanged. It was popularised in
 the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
 and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
 
-select tbl_aulas.comeco_aula, tbl_aulas.termino_aula, tbl_materias.nome
-from tbl_aulas,tbl_materias,tbl_professor
-where tbl_materias.id = tbl_aulas.id_materia;
-
-##Select Aulas
-select tbl_aulas.comeco_aula, tbl_aulas.termino_aula, tbl_materias.nome as nome_materia
-from tbl_aulas,tbl_materias,tbl_professor
-where tbl_materias.id = tbl_aulas.id_materia;
-
-select * from tbl_sexo;
-##SELECT Professor
-select tbl_usuario.nome,tbl_usuario.cnpj,tbl_usuario.cpf,tbl_usuario.rg,tbl_usuario.data_nascimento,tbl_usuario.declaracao_escolaridade, tbl_usuario.email
-from tbl_usuario,tbl_professor
-where tbl_usuario.id = tbl_professor.id_usuario;
-
-
-
-
-##SELECT Usuario
-SELECT tbl_sexo.nome
-FROM tbl_usuario
-INNER JOIN tbl_sexo 
-ON tbl_sexo.id = tbl_usuario.id_sexo;
+SELECT 
+  tbl_aulas.comeco_aula, 
+  tbl_aulas.termino_aula, 
+  tbl_materias.nome AS nome_materia,
+  tbl_usuario.nome as nome_professor
+FROM tbl_aulas
+INNER JOIN tbl_materias ON tbl_materias.id = tbl_aulas.id_materia
+INNER JOIN tbl_professor ON tbl_professor.id = tbl_aulas.id_professor
+INNER JOIN tbl_usuario ON tbl_usuario.id = tbl_professor.id_usuario;
 
 
 show tables;

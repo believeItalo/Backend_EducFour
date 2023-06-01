@@ -46,7 +46,7 @@ const deleteADM = async function (id) {
     }
 
 }
-const updateAdm  = async function(dadosAdm) {
+const updateAdm = async function (dadosAdm) {
     let sql = `update  tbl_administrador set
         nome  = '${dadosAdm.nome}',
         email = '${dadosAdm.email}',
@@ -61,8 +61,8 @@ const updateAdm  = async function(dadosAdm) {
     else {
         return false;
     }
-    
-    }
+
+}
 
 
 // const insertNeighborhood = async(dadosneighborhood) => {
@@ -141,7 +141,7 @@ const deleteNews = async function (id) {
 
 const selectAllCLasses = async () => {
 
-    let sql = 'select * from tbl_aulas;'
+    let sql = 'SELECT tbl_aulas.comeco_aula, tbl_aulas.termino_aula,tbl_materias.nome AS nome_materia,tbl_usuario.nome as nome_professor FROM tbl_aulas INNER JOIN tbl_materias ON tbl_materias.id = tbl_aulas.id_materia INNER JOIN tbl_professor ON tbl_professor.id = tbl_aulas.id_professor INNER JOIN tbl_usuario ON tbl_usuario.id = tbl_professor.id_usuario'
     let rsClasses = await prisma.$queryRawUnsafe(sql)
 
     if (rsClasses.length > 0) {
