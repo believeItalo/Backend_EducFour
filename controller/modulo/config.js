@@ -4,7 +4,7 @@ const { response } = require('express');
 const ERROR_REQUIRED_DATA = {status:400, message:'Existem dados obrigatórios que não foram preenchidos' };
 const ERROR_INVALID_CONTENT_TYPE = {status:415, message:'O tipo de midia contentType da solicitaçã não é compativel com o servidor, {aplication/json}'}
 const ERROR_INTERNAL_SERVER = {status:500, message:'ERRO interno no servidor de Banco de dados' };
-const ERROR_NOT_FOUND = {status:404, message:'nenhum registro encontrado na arequisição.'}
+const ERROR_NOT_FOUND = {status:404, message:'nenhum registro encontrado na requisição.'}
 const ERROR_REQUIRED_ID = {status:400, message:'o atributo id é obrigatórios que não na requisição' };// 
 //Menssagens de confirmação
 const CREATED_ITEM = {status:201, message:'Registro criado com sucesso'}
