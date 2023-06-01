@@ -1,4 +1,5 @@
 create database educ_four_database;
+
 use educ_four_database;
 create table tbl_sexo(
 id int not null auto_increment primary key,
@@ -12,6 +13,7 @@ numero varchar(45),
 
 unique index (id)
 );
+
 create table tbl_bairro(
 id int not null auto_increment primary key,
 nome varchar(55),
@@ -24,6 +26,7 @@ nome varchar(55),
 
 unique index (id)
 );
+
 create table tbl_endereco(
 id int not null auto_increment primary key,
 cep varchar(45),
@@ -39,6 +42,7 @@ references tbl_bairro (id),
 
 unique index (id)
 );
+
 create table tbl_usuario(
 id int not null auto_increment primary key,
 nome varchar(90),
@@ -63,8 +67,6 @@ references tbl_telefone (id),
 
 unique index (id)
 );
-
-
 create table tbl_doador(
 id int not null auto_increment primary key,
 tipo_doacao varchar(145),
@@ -94,9 +96,9 @@ nome varchar(45),
 unique index (id)
 );
 
+
 create table tbl_professor(
 id int not null auto_increment primary key,
-area_conhecimento varchar(45),
 horarios_disponiveis text,
 id_usuario int not null,
 id_materias int not null,
@@ -110,20 +112,28 @@ references tbl_materias (id),
 
 unique index (id)
 );
-select * from tbl_usuario;
+select * from tbl_materias;
+
+
 
 create table tbl_aulas(
 id int not null auto_increment primary key,
-horario_aula datetime,
-duracao_aula datetime,
-materia varchar(45),
+comeco_aula varchar(45),
+termino_aula varchar(45),
+id_materia int,
 id_professor int not null,
 constraint FK_professor_aula
 foreign key (id_professor)
 references tbl_professor (id),
+constraint FK_materia_aula
+foreign key (id_materia)
+references tbl_materias (id),
+
 
 unique index (id)
 );
+
+
 create table tbl_turmas(
 id int not null auto_increment primary key,
 quantidade_alunos int,
@@ -171,9 +181,51 @@ create table tbl_dias_aulas(
 unique index (id)
 );
 
-#####################
+##POPULANDO AS TABELAS
+Select * from tbl_sexo;
 
-
+##SEXO
+insert into tbl_sexo(nome) values('Masculino');
+insert into tbl_sexo(nome) values('Feminino');
+##SEXO
+#TELEFONE
+insert into tbl_telefone(numero) values('1196748343');
+insert into tbl_telefone(numero) values('1199859490');
+insert into tbl_telefone(numero) values('1113489349');
+insert into tbl_telefone(numero) values('1199387489');
+#TELEFONE
+##BAIRROS
+insert into tbl_bairro(nome)values('Jd Bonança');
+insert into tbl_bairro(nome)values('Jd Piratininga');
+insert into tbl_bairro(nome)values('Helena Maria');
+insert into tbl_bairro(nome)values('Centro');
+##BAIRROS
+##CIDADES
+insert into tbl_cidade(nome) values ('Osasco');
+insert into tbl_cidade(nome) values ('Jandira');
+insert into tbl_cidade(nome) values ('Barueri');
+##CIDADES
+##ENDERECO
+insert into tbl_endereco(cep,logradouro,id_bairro,id_cidade)values('06266230','R Abel Ferreira da Silva 58', 1,1);
+insert into tbl_endereco(cep,logradouro,id_bairro,id_cidade)values('06266230','R Marcos Rocha 2', 2,1);
+insert into tbl_endereco(cep,logradouro,id_bairro,id_cidade)values('06266230','R Xerife Gustavo Gómez 58', 3,1);
+##ENDERECO
+##USUARIOS
+insert into tbl_usuario
+(nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone)
+values('Maria De Lourdes','12345678910','5523743843','129302032','1970-09-13','declaração escolaridade','mariadelourdes@gmail.com',2,1,1);
+##USUARIOS
+##MATERIAS
+insert into tbl_materias(nome)values('Língua Portuguesa');
+insert into tbl_materias(nome)values('Língua Inglesa');
+insert into tbl_materias(nome)values('Sociologia');
+##MATERIAS
+##PROFESSOR
+insert into tbl_professor(horarios_disponiveis,id_usuario,id_materias)values('Das 9:00 as 14:00',1,1);
+##PROFESSOR
+##AULAS
+insert into tbl_aulas(comeco_aula,termino_aula,id_materia,id_professor)values('10:00','12:00',1,1);
+##AULAS
 insert into tbl_administrador(nome,email,senha)values('Testador Da Silva','testador@gmail.com.br','teste12345678');
 
 
@@ -188,7 +240,29 @@ electronic typesetting, remaining essentially unchanged. It was popularised in
 the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
 and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
 
-select * from tbl_aulas;
+select tbl_aulas.comeco_aula, tbl_aulas.termino_aula, tbl_materias.nome
+from tbl_aulas,tbl_materias,tbl_professor
+where tbl_materias.id = tbl_aulas.id_materia;
+
+##Select Aulas
+select tbl_aulas.comeco_aula, tbl_aulas.termino_aula, tbl_materias.nome as nome_materia
+from tbl_aulas,tbl_materias,tbl_professor
+where tbl_materias.id = tbl_aulas.id_materia;
+
+select * from tbl_sexo;
+##SELECT Professor
+select tbl_usuario.nome,tbl_usuario.cnpj,tbl_usuario.cpf,tbl_usuario.rg,tbl_usuario.data_nascimento,tbl_usuario.declaracao_escolaridade, tbl_usuario.email
+from tbl_usuario,tbl_professor
+where tbl_usuario.id = tbl_professor.id_usuario;
+
+
+
+
+##SELECT Usuario
+SELECT tbl_sexo.nome
+FROM tbl_usuario
+INNER JOIN tbl_sexo 
+ON tbl_sexo.id = tbl_usuario.id_sexo;
 
 
 show tables;
