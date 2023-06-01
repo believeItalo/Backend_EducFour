@@ -46,14 +46,16 @@ const deleteADM = async function (id) {
     }
 
 }
-const updateAdm = async function (dadosAdm) {
+const updateAdm  = async function(dadosAdm) {
     let sql = `update  tbl_administrador set
         nome  = '${dadosAdm.nome}',
         email = '${dadosAdm.email}',
         senha = '${dadosAdm.senha}'
         where id = ${dadosAdm.id} `
 
-    let rsAdm = await prisma.$queryRawUnsafe(sql)
+        console.log(dadosAdm);
+        
+    let rsAdm = await prisma.$executeRawUnsafe(sql)
 
     if (rsAdm) {
         return true;
@@ -61,8 +63,8 @@ const updateAdm = async function (dadosAdm) {
     else {
         return false;
     }
-
-}
+    
+    }
 
 
 // const insertNeighborhood = async(dadosneighborhood) => {
@@ -96,6 +98,30 @@ const selectAllNews = async () => {
         return false
     }
 }
+
+const updateNews  = async function(dadosNews) {
+    let sql = `update  tbl_noticias set
+       
+    titulo       = '${dadosNews.titulo}',
+    nome_autor   = '${dadosNews.nome_autor}',
+    descricao    = '${dadosNews.descricao}',
+    capa_noticia = '${dadosNews.capa_noticia}',
+    tema         = '${dadosNews.tema}',
+    data_noticia = '${dadosNews.data_noticia}'
+    corpo_noticia = '${dadosNews.corpo_noticia}'
+    where id     =  ${dadosNews.id} `
+
+    let rsNEW = await prisma.$executeRawUnsafe(sql)
+
+    if (rsNEW) {
+        return true;
+    }
+    else {
+        return false;
+    }
+    
+    }
+
 
 const insertNews = async (dadosNews) => {
 
@@ -161,5 +187,6 @@ module.exports = {
     deleteADM,
     selectAllCLasses,
     deleteNews,
-    updateAdm
+    updateAdm,
+    updateNews
 }

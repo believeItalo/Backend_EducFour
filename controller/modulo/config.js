@@ -9,6 +9,7 @@ const ERROR_REQUIRED_ID = {status:400, message:'o atributo id é obrigatórios q
 //Menssagens de confirmação
 const CREATED_ITEM = {status:201, message:'Registro criado com sucesso'}
 const DELETE_ITEM = {status:200, message:'Registro deletado'}
+const UPDATED_ITEM = { status: 200, message: 'Registro atualizado com sucesso!' }
 module.exports = {
     ERROR_REQUIRED_DATA,
     CREATED_ITEM,
@@ -16,5 +17,6 @@ module.exports = {
     ERROR_NOT_FOUND,
     ERROR_REQUIRED_ID,
     DELETE_ITEM,
-    ERROR_INTERNAL_SERVER
+    ERROR_INTERNAL_SERVER,
+    UPDATED_ITEM
 }

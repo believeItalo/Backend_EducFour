@@ -33,6 +33,21 @@ app.get('/v1/educ_four/news', cors(), async function (request,response){
    console.log('teste');
 })
 
+app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {  
+   //recebe os dados do body   
+  let dados = request.body
+
+  //recebe o id do aluno
+  let idNews = request.params.id
+
+  //encaminhar os dados para serem atualizados
+  let resultUpdateDados = await controllerEducFour.atualizarNoticias(dados, idNews)
+  
+  response.status(resultUpdateDados.status)
+  response.json(resultUpdateDados)
+
+});
+
 app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,response){
    let contentType = request.headers['content-type'];
    if(String(contentType).toLowerCase() == 'application/json'){
@@ -101,20 +116,24 @@ app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, respo
 
 //PUT ADM
 
-app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {  
+app.put('/v1/educ_four/updateadm/:id', cors(), bodyJson, async function(request, response) {  
    //recebe os dados do body   
   let dados = request.body
 
   //recebe o id do aluno
   let idAdm = request.params.id
 
+
+  
   //encaminhar os dados para serem atualizados
   let resultUpdateDados = await controllerEducFour.atualizarAdm(dados, idAdm)
-  
   response.status(resultUpdateDados.status)
   response.json(resultUpdateDados)
 
+  
+
 });
+
 
 //ADMINISTRADORES
 

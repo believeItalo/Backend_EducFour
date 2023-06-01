@@ -49,6 +49,7 @@ const deletarAdm = async (idAdm) => {
     }
 }
 
+
 const atualizarAdm = async (dadosAdm, idAdm) =>{
     if (dadosAdm.nome == ' ' || dadosAdm.nome == undefined || dadosAdm.nome.length > 45 ||
     dadosAdm.email == ' ' || dadosAdm.email == undefined || dadosAdm.email.length > 90 ||
@@ -63,17 +64,19 @@ const atualizarAdm = async (dadosAdm, idAdm) =>{
     dadosAdm.id = idAdm
 
     let status = await educ_DAO.updateAdm(dadosAdm)
-
+    
+    
     if(status){
         let dadosJSon = {} 
 
         dadosJSon.status = message.UPDATED_ITEM.status
         dadosJSon.adm = dadosAdm
 
-        return dadosJson
+        return dadosJSon
     }
     else
         return message.ERROR_INTERNAL_SERVER
+        
 }
 }
 //ADMS
@@ -131,6 +134,38 @@ const deletarNoticia = async (idNot) => {
         }
     }
 }
+const atualizarNoticias = async (dadosNews, idNew) =>{ 
+
+    if (dadosNews.titulo == '' || dadosNews.titulo == undefined || dadosNews.titulo.length > 45 ||
+    dadosNews.nome_autor == '' || dadosNews.nome_autor == undefined || dadosNews.nome_autor > 90 ||
+    dadosNews.descricao == '' || dadosNews.descricao == undefined || dadosNews.descricao > 100 ||
+    dadosNews.capa_noticia == ' ' || dadosNews.capa_noticia == undefined || dadosNews.capa_noticia > 45 ||
+    dadosNews.tema == ' ' || dadosNews.tema == undefined || dadosNews.tema > 45 ||
+    dadosNews.data_noticia == ' ' || dadosNews.data_noticia == undefined || dadosNews.data_noticia > 45||
+    dadosNews.corpo_noticia == ' '|| dadosNews.corpo_noticia == undefined
+) {
+    return message.ERROR_REQUIRED_DATA
+
+} else if(idNew == '' || idNew == undefined || isNaN(idNew)){
+
+    return message.ERROR_REQUIRED_ID
+}else {
+    dadosNews.id = idNew
+
+    let status = await educ_DAO.updateNews(dadosNews)
+
+    if(status){
+        let dadosJson = {} 
+
+        dadosJson.status = message.UPDATED_ITEM.status
+        dadosJson.new = dadosNews
+
+        return dadosJson
+    }
+    else
+        return message.ERROR_INTERNAL_SERVER
+}
+}
 //NOTICIAS
 
 //AULAS
@@ -158,7 +193,8 @@ module.exports = {
     deletarAdm,
     selecionarTodasAsAulas,
     deletarNoticia,
-    atualizarAdm
+    atualizarAdm,
+    atualizarNoticias
     // inserirBairro
 }
 
