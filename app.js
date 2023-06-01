@@ -59,6 +59,21 @@ app.delete('/v1/educ_four/deletenews/:id', cors(), async function (request, resp
    response.json(resultDeleteDados)
 
 })
+
+app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {  
+   //recebe os dados do body   
+  let dados = request.body
+
+  //recebe o id do aluno
+  let idNews = request.params.id
+
+  //encaminhar os dados para serem atualizados
+  let resultUpdateDados = await controllerEducFour.atualizarNoticias(dados, idNews)
+  
+  response.status(resultUpdateDados.status)
+  response.json(resultUpdateDados)
+
+});
 //NOTICIASgit
 
 //ADMINISTRADORES
@@ -101,7 +116,7 @@ app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, respo
 
 //PUT ADM
 
-app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {  
+app.put('/v1/educ_four/updateadm/:id', cors(), bodyJson, async function(request, response) {  
    //recebe os dados do body   
   let dados = request.body
 

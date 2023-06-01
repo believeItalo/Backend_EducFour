@@ -164,15 +164,21 @@ corpo_noticia text,
 unique index (id)
 
 );
+
+alter table tbl_noticias
+add column corpo_noticia text not null;  
+
+
 create table tbl_dias_aulas(
 	id int not null auto_increment primary key,
 	dia_aula varchar(45),
 
 unique index (id)
 );
-
+ssss
 #####################
 
+select * from tbl_noticias;
 
 insert into tbl_administrador(nome,email,senha)values('Testador Da Silva','testador@gmail.com.br','teste12345678');
 
