@@ -59,7 +59,7 @@ app.delete('/v1/educ_four/deletenews/:id', cors(), async function (request, resp
    response.json(resultDeleteDados)
 
 })
-//NOTICIAS
+//NOTICIASgit
 
 //ADMINISTRADORES
 
