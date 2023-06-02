@@ -178,8 +178,6 @@ const selectAllrsNeighbor = async () => {
     }
 }
 
-
-
 const insertNeighborhood = async(dadosneighborhood) => {
     let sql =`insert into tbl_bairro
     (nome)
@@ -211,15 +209,11 @@ const selectAllrsCity = async () => {
         return false
     }
 }
-
-
-
 const insertCity = async(dadosCity) => {
     let sql =`insert into tbl_cidade
     (nome)
         values
-        ('${dadosCity.nome}'
-          ) `;
+        ('${dadosCity.nome}') `;
           let rsCity = await prisma.$queryRawUnsafe(sql)
 
 
@@ -230,9 +224,38 @@ const insertCity = async(dadosCity) => {
              return false;
           }
     }
+//LOGRADOURA
 
+const selectAllrsComplement = async () => {
 
+    let sql = 'select * from tbl_endereco;'
+    let rsAddress = await prisma.$queryRawUnsafe(sql)
 
+    if (rsAddress.length > 0) {
+        return rsAddress
+    }
+    else {
+
+        return false
+    }
+}
+
+const insertComplement = async(dadosaddress) => {
+   
+    let sql = `insert into tbl_endereco
+    (cep, logradouro)
+        values
+        ('${dadosaddress.cep}',
+        '${dadosaddress.logradouro}'
+          ) `;
+          let rsEnd = await prisma.$queryRawUnsafe(sql)
+          if(rsEnd) {
+              return true;
+          }
+          else{
+             return false;
+          }
+    }
 
 
 module.exports = {
@@ -248,6 +271,8 @@ module.exports = {
     insertNeighborhood,
     selectAllrsNeighbor,
     insertCity,
-    selectAllrsCity
+    selectAllrsCity,
+    insertComplement,
+    selectAllrsComplement
     
 }

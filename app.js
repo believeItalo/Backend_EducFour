@@ -188,6 +188,27 @@ app.post('/v1/educ_four/postcity', cors(), bodyJson, async function (request, re
    }
 })
 
+//Endereco
+app.get('/v1/educ_four/address', cors(), async function (request,response){
+   let dados = await controllerEducFour.selecionarTodosEndereco()
+
+   response.status(200)
+   response.json(dados)
+ 
+});
+app.post('/v1/educ_four/postaddress', cors(), bodyJson, async function (request, response) {
+   let contentType = request.headers['content-type'];
+   if (String(contentType).toLowerCase() == 'application/json') {
+      let dadosBody = request.body;
+      let resultInsertAddress = await controllerEducFour.inserirEndereco(dadosBody)
+      response.status(resultInsertAddress.status)
+      response.json(resultInsertAddress)
+
+   } else {
+      response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+      response.json(message.ERROR_INVALID_CONTENT_TYPE)
+   }
+})
 
 
 

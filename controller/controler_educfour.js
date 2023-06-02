@@ -236,18 +236,50 @@ const selecionarTodasCidades = async () => {
 }
 
 const inserirCidade = async (dadosCity) =>{
-    if(dadosCity.nome == '' || dadosCity.nome == undefined || dadosCity.nome.length > 55
+    if(dadosCity.nome == '' || dadosCity.nome == undefined || dadosCity.nome > 55
     ){
         return message.ERROR_REQUIRED_DATA
 
     }else {
-        let status = await educ_DAO.insertCity()
+        let status = await educ_DAO.insertCity(dadosCity)
 
         return message.CREATED_ITEM
     }
 }
 
+//ENDERECO
+const selecionarTodosEndereco = async () => {
 
+    let dadosLogradouro = await educfour_DAO.selectAllrsComplement()
+
+    let dadosJson = {}
+
+    if (dadosLogradouro) {
+        dadosJson.status = 200
+        dadosJson.bairro = dadosLogradouro
+        return dadosJson
+    }
+    else {
+        return message.ERROR_NOT_FOUND
+    }
+}
+
+const inserirEndereco = async (dadosaddress) =>{
+console.log(dadosaddress);
+
+
+    if(dadosaddress.cep == '' || dadosaddress.cep == undefined || dadosaddress.cep  > 45 ||
+       dadosaddress.logradouro == '' || dadosaddress.logradouro == undefined || dadosaddress.logradouro > 70
+    ){
+
+        return message.ERROR_REQUIRED_DATA
+
+    }else {
+        let status = await educ_DAO.insertComplement(dadosaddress)
+
+        return message.CREATED_ITEM
+    }
+}
 
 
 module.exports = {
@@ -263,7 +295,10 @@ module.exports = {
     inserirBairro,
     selecionarTodososBairro,
     selecionarTodasCidades,
-    inserirCidade 
+    inserirCidade,
+    inserirEndereco ,
+    selecionarTodosEndereco
+
 
     // inserirBairro
 }
