@@ -1,6 +1,7 @@
 create database educ_four_database;
 
 use educ_four_database;
+show tables;
 create table tbl_sexo(
 id int not null auto_increment primary key,
 nome varchar(30),
@@ -174,6 +175,24 @@ corpo_noticia text,
 unique index (id)
 
 );
+
+insert into tbl_noticias (titulo,
+ nome_autor, 
+ descricao, 
+ capa_noticia, 
+ tema,
+ data_noticia
+ ,corpo_noticia) values (
+ 'blesaaa',
+ 'clara',
+ ' Bill Skarsgard',
+ 'notem',
+ 'Bill Skarsgård  é um ator sueco. Ele é reconhecido por seu papel na série de suspense Hemlock Grove e como o palhaço Pennywise no reboot do filme It - A Coisa (2017) e na sequência  It – Capítulo Dois (2019). Bill nasceu em Estocolmo, Suécia e vem de uma família de atores. Sua carreira começou aos dez anos de idade no filme sueco Järngänget, porém só aos dezoito anos, ela deslanchou de vez. Em 2011 o ator foi nomeado para um Prêmio Guldbagge (Principal Prêmio de Cinema da Suécia) pelo seu desempenho no filme No Espaço não Existem Sentimentos (2010) e no ano seguinte foi considerado uma das Shooting Stars no Festival Internacional de Cinema de Berlim. Já com uma carreira consolidada na Suécia, Bill conseguiu o seu primeiro papel de protagonista num projeto internacional na série Hemlock Grove, uma das primeiras produções originais da Netflix. Com o fim de ...',
+ '2023-07-12',
+ 'ilahvdhlevvdivhlieevlivh'
+ );
+
+
 create table tbl_dias_aulas(
 	id int not null auto_increment primary key,
 	dia_aula varchar(45),
@@ -182,7 +201,7 @@ unique index (id)
 );
 
 ##POPULANDO AS TABELAS
-Select * from tbl_sexo;
+Select * from tbl_noticias;
 
 ##SEXO
 insert into tbl_sexo(nome) values('Masculino');

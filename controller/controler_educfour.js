@@ -101,13 +101,15 @@ const selecionarTodasAsNoticias = async () => {
 }
 
 const inserirNoticia = async function (dadosNews) {
+    console.log(dadosNews);
 
     if (dadosNews.titulo == '' || dadosNews.titulo == undefined || dadosNews.titulo.length > 45 ||
         dadosNews.nome_autor == '' || dadosNews.nome_autor == undefined || dadosNews.nome_autor > 90 ||
         dadosNews.descricao == '' || dadosNews.descricao == undefined || dadosNews.descricao > 100 ||
         dadosNews.capa_noticia == ' ' || dadosNews.capa_noticia == undefined || dadosNews.capa_noticia > 45 ||
         dadosNews.tema == ' ' || dadosNews.tema == undefined || dadosNews.tema > 45 ||
-        dadosNews.data_noticia == ' ' || dadosNews.data_noticia == undefined || dadosNews.data_noticia > 45
+        dadosNews.data_noticia == ' ' || dadosNews.data_noticia == undefined || dadosNews.data_noticia > 45||
+        dadosNews.corpo_noticia == ' '|| dadosNews.corpo_noticia == undefined
     ) {
 
         return message.ERROR_REQUIRED_DATA
@@ -145,6 +147,7 @@ const atualizarNoticias = async (dadosNews, idNew) =>{
     dadosNews.corpo_noticia == ' '|| dadosNews.corpo_noticia == undefined
 ) {
     return message.ERROR_REQUIRED_DATA
+    
 
 } else if(idNew == '' || idNew == undefined || isNaN(idNew)){
 
