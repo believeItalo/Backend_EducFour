@@ -32,14 +32,9 @@ app.get('/v1/educ_four/news', cors(), async function (request,response){
    
 })
 
-app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {  
-   //recebe os dados do body   
+app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {    
   let dados = request.body
-
-  //recebe o id do aluno
   let idNews = request.params.id
-
-  //encaminhar os dados para serem atualizados
   let resultUpdateDados = await controllerEducFour.atualizarNoticias(dados, idNews)
   
   response.status(resultUpdateDados.status)
@@ -116,22 +111,19 @@ app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, respo
 //PUT ADM
 
 app.put('/v1/educ_four/updateadm/:id', cors(), bodyJson, async function(request, response) {  
-   //recebe os dados do body   
+   
   let dados = request.body
-
-  //recebe o id do aluno
   let idAdm = request.params.id
-
-
-  
-  //encaminhar os dados para serem atualizados
   let resultUpdateDados = await controllerEducFour.atualizarAdm(dados, idAdm)
   response.status(resultUpdateDados.status)
   response.json(resultUpdateDados)
 
   
+  
 
 });
+
+
 //ADMINISTRADORES
 
 //AULAS
@@ -143,14 +135,12 @@ app.get('/v1/educ_four/getaulas', cors(), bodyJson, async function (request, res
    response.json(dados)
 
 })
-
-//BAIRRO
 app.get('/v1/educ_four/neighborhood', cors(), async function (request,response){
    let dados = await controllerEducFour.selecionarTodososBairro()
 
    response.status(200)
    response.json(dados)
- 
+
 });
 app.post('/v1/educ_four/postneighborhood', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
@@ -172,7 +162,7 @@ app.get('/v1/educ_four/city', cors(), async function (request,response){
 
    response.status(200)
    response.json(dados)
- 
+
 });
 app.post('/v1/educ_four/postcity', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
@@ -187,12 +177,6 @@ app.post('/v1/educ_four/postcity', cors(), bodyJson, async function (request, re
       response.json(message.ERROR_INVALID_CONTENT_TYPE)
    }
 })
-
-
-
-
-
-
 
 
 app.listen(8080, function () {
