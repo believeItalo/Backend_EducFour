@@ -107,8 +107,8 @@ const updateNews  = async function(dadosNews) {
     descricao    = '${dadosNews.descricao}',
     capa_noticia = '${dadosNews.capa_noticia}',
     tema         = '${dadosNews.tema}',
-    data_noticia = '${dadosNews.data_noticia}'
-    corpo_noticia = '${dadosNews.corpo_noticia}'
+    data_noticia = '${dadosNews.data_noticia}',
+   corpo_noticia = '${dadosNews.corpo_noticia}',
     where id     =  ${dadosNews.id} `
 
     let rsNEW = await prisma.$executeRawUnsafe(sql)
@@ -127,14 +127,15 @@ const insertNews = async (dadosNews) => {
 
 
     let sql = `insert into tbl_noticias 
-    (titulo,nome_autor,descricao,capa_noticia,tema,data_noticia)
+    (titulo,nome_autor,descricao,capa_noticia,tema,data_noticia,corpo_noticia)
         values
         ('${dadosNews.titulo}',
         '${dadosNews.nome_autor}',
         '${dadosNews.descricao}',
         '${dadosNews.capa_noticia}',
         '${dadosNews.tema}',
-        '${dadosNews.data_noticia}'
+        '${dadosNews.data_noticia}',
+        '${dadosNews.corpo_noticia}'
           ) `;
 
     let rsNews = await prisma.$queryRawUnsafe(sql)

@@ -29,8 +29,7 @@ app.get('/v1/educ_four/news', cors(), async function (request,response){
    response.status(200)
    response.json(dados)
 
-   console.log(dados);
-   console.log('teste');
+   
 })
 
 app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {  
