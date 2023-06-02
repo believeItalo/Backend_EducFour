@@ -22,6 +22,10 @@ const selecionarTodososAdms = async () => {
 }
 
 const inserirAdm = async (dadosAdm) => {
+
+console.log(dadosAdm);
+
+
     if (dadosAdm.nome == ' ' || dadosAdm.nome == undefined || dadosAdm.nome.length > 45 ||
         dadosAdm.email == ' ' || dadosAdm.email == undefined || dadosAdm.email.length > 90 ||
         dadosAdm.senha == ' ' || dadosAdm.senha == undefined || dadosAdm.senha.length > 45
@@ -101,8 +105,6 @@ const selecionarTodasAsNoticias = async () => {
 }
 
 const inserirNoticia = async function (dadosNews) {
-    console.log(dadosNews);
-
     if (dadosNews.titulo == '' || dadosNews.titulo == undefined || dadosNews.titulo.length > 45 ||
         dadosNews.nome_autor == '' || dadosNews.nome_autor == undefined || dadosNews.nome_autor > 90 ||
         dadosNews.descricao == '' || dadosNews.descricao == undefined || dadosNews.descricao > 100 ||
@@ -120,7 +122,6 @@ const inserirNoticia = async function (dadosNews) {
         return message.CREATED_ITEM
     }
 }
-
 const deletarNoticia = async (idNot) => {
 
     if(idNot == ' '|| idNot == undefined || isNaN(idNot)){
@@ -169,8 +170,6 @@ const atualizarNoticias = async (dadosNews, idNew) =>{
         return message.ERROR_INTERNAL_SERVER
 }
 }
-//NOTICIAS
-
 //AULAS
 const selecionarTodasAsAulas = async () => {
 
@@ -188,6 +187,69 @@ const selecionarTodasAsAulas = async () => {
         dadosJSon.status = 404
     }
 }
+
+//BAIRRO
+const selecionarTodososBairro = async () => {
+
+    let dadosBairro = await educfour_DAO.selectAllrsNeighbor()
+
+    let dadosJson = {}
+
+    if (dadosBairro) {
+        dadosJson.status = 200
+        dadosJson.bairro = dadosBairro
+        return dadosJson
+    }
+    else {
+        return message.ERROR_NOT_FOUND
+    }
+}
+
+const inserirBairro = async (dadosNeighbor) =>{
+    if(dadosNeighbor.nome == '' || dadosNeighbor.nome == undefined || dadosNeighbor.nome.length > 55
+    ){
+        return message.ERROR_REQUIRED_DATA
+
+    }else {
+        let status = await educ_DAO.insertNeighborhood(dadosNeighbor)
+
+        return message.CREATED_ITEM
+    }
+}
+
+//CIDADE
+
+const selecionarTodasCidades = async () => {
+
+    let dadosCidade = await educfour_DAO.selectAllrsCity()
+
+    let dadosJson = {}
+
+    if (dadosCidade) {
+        dadosJson.status = 200
+        dadosJson.cidade = dadosCidade
+        return dadosJson
+    }
+    else {
+        return message.ERROR_NOT_FOUND
+    }
+}
+
+const inserirCidade = async (dadosCity) =>{
+    if(dadosCity.nome == '' || dadosCity.nome == undefined || dadosCity.nome.length > 55
+    ){
+        return message.ERROR_REQUIRED_DATA
+
+    }else {
+        let status = await educ_DAO.insertCity()
+
+        return message.CREATED_ITEM
+    }
+}
+
+
+
+
 module.exports = {
     selecionarTodasAsNoticias,
     inserirNoticia,
@@ -197,7 +259,12 @@ module.exports = {
     selecionarTodasAsAulas,
     deletarNoticia,
     atualizarAdm,
-    atualizarNoticias
+    atualizarNoticias,
+    inserirBairro,
+    selecionarTodososBairro,
+    selecionarTodasCidades,
+    inserirCidade 
+
     // inserirBairro
 }
 

@@ -65,24 +65,6 @@ const updateAdm  = async function(dadosAdm) {
     }
     
     }
-
-
-// const insertNeighborhood = async(dadosneighborhood) => {
-//     let sql =`insert into tbl_bairro
-//     (nome)
-//         values
-//         ('${dadosneighborhood.nome}'
-//           ) `;
-//           let rsAdm = await prisma.$queryRawUnsafe(sql)
-
-
-//           if(rsAdm) {
-//               return true;
-//           }
-//           else{
-//              return false;
-//           }
-//     }
 ///////////////GG
 
 const selectAllNews = async () => {
@@ -180,6 +162,79 @@ const selectAllCLasses = async () => {
     }
 }
 
+
+//BAIRRO
+const selectAllrsNeighbor = async () => {
+
+    let sql = 'select * from tbl_bairro;'
+    let rsNeighbor = await prisma.$queryRawUnsafe(sql)
+
+    if (rsNeighbor.length > 0) {
+        return rsNeighbor
+    }
+    else {
+
+        return false
+    }
+}
+
+
+
+const insertNeighborhood = async(dadosneighborhood) => {
+    let sql =`insert into tbl_bairro
+    (nome)
+        values
+        ('${dadosneighborhood.nome}'
+          ) `;
+          let rsBor = await prisma.$queryRawUnsafe(sql)
+
+
+          if(rsBor) {
+              return true;
+          }
+          else{
+             return false;
+          }
+    }
+
+//CIDADE
+const selectAllrsCity = async () => {
+
+    let sql = 'select * from tbl_cidade;'
+    let rsCity = await prisma.$queryRawUnsafe(sql)
+
+    if (rsCity.length > 0) {
+        return rsCity
+    }
+    else {
+
+        return false
+    }
+}
+
+
+
+const insertCity = async(dadosCity) => {
+    let sql =`insert into tbl_cidade
+    (nome)
+        values
+        ('${dadosCity.nome}'
+          ) `;
+          let rsCity = await prisma.$queryRawUnsafe(sql)
+
+
+          if(rsCity) {
+              return true;
+          }
+          else{
+             return false;
+          }
+    }
+
+
+
+
+
 module.exports = {
     selectAllAdm,
     selectAllNews,
@@ -189,5 +244,10 @@ module.exports = {
     selectAllCLasses,
     deleteNews,
     updateAdm,
-    updateNews
+    updateNews,
+    insertNeighborhood,
+    selectAllrsNeighbor,
+    insertCity,
+    selectAllrsCity
+    
 }

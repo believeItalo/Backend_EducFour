@@ -1,7 +1,6 @@
 create database educ_four_database;
 
 use educ_four_database;
-show tables;
 create table tbl_sexo(
 id int not null auto_increment primary key,
 nome varchar(30),
@@ -113,9 +112,6 @@ references tbl_materias (id),
 
 unique index (id)
 );
-select * from tbl_materias;
-
-
 
 create table tbl_aulas(
 id int not null auto_increment primary key,
@@ -176,21 +172,6 @@ unique index (id)
 
 );
 
-insert into tbl_noticias (titulo,
- nome_autor, 
- descricao, 
- capa_noticia, 
- tema,
- data_noticia
- ,corpo_noticia) values (
- 'blesaaa',
- 'clara',
- ' Bill Skarsgard',
- 'notem',
- 'Bill Skarsgård  é um ator sueco. Ele é reconhecido por seu papel na série de suspense Hemlock Grove e como o palhaço Pennywise no reboot do filme It - A Coisa (2017) e na sequência  It – Capítulo Dois (2019). Bill nasceu em Estocolmo, Suécia e vem de uma família de atores. Sua carreira começou aos dez anos de idade no filme sueco Järngänget, porém só aos dezoito anos, ela deslanchou de vez. Em 2011 o ator foi nomeado para um Prêmio Guldbagge (Principal Prêmio de Cinema da Suécia) pelo seu desempenho no filme No Espaço não Existem Sentimentos (2010) e no ano seguinte foi considerado uma das Shooting Stars no Festival Internacional de Cinema de Berlim. Já com uma carreira consolidada na Suécia, Bill conseguiu o seu primeiro papel de protagonista num projeto internacional na série Hemlock Grove, uma das primeiras produções originais da Netflix. Com o fim de ...',
- '2023-07-12',
- 'ilahvdhlevvdivhlieevlivh'
- );
 
 
 create table tbl_dias_aulas(
@@ -201,7 +182,7 @@ unique index (id)
 );
 
 ##POPULANDO AS TABELAS
-Select * from tbl_noticias;
+
 
 ##SEXO
 insert into tbl_sexo(nome) values('Masculino');
@@ -240,17 +221,17 @@ insert into tbl_materias(nome)values('Língua Inglesa');
 insert into tbl_materias(nome)values('Sociologia');
 ##MATERIAS
 ##PROFESSOR
-insert into tbl_professor(horarios_disponiveis,id_usuario,id_materias)values('Das 9:00 as 14:00',1,1);
+insert into tbl_professor(horarios_disponiveis,id_usuario,id_materias)values('Das 900 as 1400',1,1);
 ##PROFESSOR
 ##AULAS
-insert into tbl_aulas(comeco_aula,termino_aula,id_materia,id_professor)values('10:00','12:00',1,1);
+insert into tbl_aulas(comeco_aula,termino_aula,id_materia,id_professor)values('1000','1200',1,1);
 ##AULAS
 insert into tbl_administrador(nome,email,senha)values('Testador Da Silva','testador@gmail.com.br','teste12345678');
 
 
 insert into tbl_noticias(titulo,nome_autor,descricao,capa_noticia,tema,data_noticia,corpo_noticia) 
 values(
-'Isso é um teste', 'Testador da Silva', 'É um teste, quer saber mais oque ?','nao tem','teste','01/06/2023',
+'Isso é um teste', 'Testador da Silva', 'É um teste, quer saber mais oque ','nao tem','teste','01062023',
 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
 Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
 when an unknown printer took a galley of type and scrambled it to make a type 
