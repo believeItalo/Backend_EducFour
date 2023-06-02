@@ -177,7 +177,24 @@ app.post('/v1/educ_four/postcity', cors(), bodyJson, async function (request, re
       response.json(message.ERROR_INVALID_CONTENT_TYPE)
    }
 })
+//PROFESSOR
+app.get('/v1/educ_four/prof', cors(), async function (request,response){
 
+   let dados = await controllerEducFour.selecionarTodosProf()
+   
+   response.status(200)
+   response.json(dados)
+
+});
+//USERs
+app.get('/v1/educ_four/users', cors(), async function (request,response){
+
+   let dados = await controllerEducFour.selecionarTodosUsuarios()
+   
+   response.status(200)
+   response.json(dados)
+
+});
 
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')

@@ -1,6 +1,7 @@
-create database educ_four_database;
 
+create database educ_four_database;
 use educ_four_database;
+show tables;
 create table tbl_sexo(
 id int not null auto_increment primary key,
 nome varchar(30),
@@ -52,6 +53,8 @@ rg varchar(45),
 data_nascimento date,
 declaracao_escolaridade varchar(100),
 email varchar(90),
+area_de_atuacao varchar(45),
+motivo_inscricao text,
 id_sexo int not null,
 id_endereco int not null,
 id_telefone int not null,
@@ -67,19 +70,18 @@ references tbl_telefone (id),
 
 unique index (id)
 );
-create table tbl_doador(
-id int not null auto_increment primary key,
-tipo_doacao varchar(145),
-id_usuario int not null,
-constraint FK_usuario_doador
-foreign key (id_usuario)
-references tbl_usuario (id),
+##create table tbl_doador(
+##id int not null auto_increment primary key,
+##tipo_doacao varchar(145),
+##id_usuario int not null,
+##constraint FK_usuario_doador
+##foreign key (id_usuario)
+##references tbl_usuario (id),
 
-unique index (id)
-);
+##unique index (id)
+##);
 create table tbl_outros_funcionarios(
 id int not null auto_increment primary key,
-motivo_inscricao varchar(145),
 horarios_disponiveis text,
 id_usuario int not null,
 constraint FK_usuario_outros_funcionarios
@@ -112,6 +114,9 @@ references tbl_materias (id),
 
 unique index (id)
 );
+select * from tbl_materias;
+
+
 
 create table tbl_aulas(
 id int not null auto_increment primary key,
@@ -160,12 +165,12 @@ unique index (id)
 );
 create table tbl_noticias(
 id int not null auto_increment primary key,
-titulo varchar(45),
-nome_autor varchar(90),
-descricao varchar(100),
-capa_noticia varchar(45),
-tema varchar(45),
-data_noticia varchar(45),
+titulo varchar(45) not null,
+nome_autor varchar(90) not null,
+descricao varchar(100) not null,
+capa_noticia varchar(45) not null,
+tema varchar(45) not null,
+data_noticia varchar(45) not null,
 corpo_noticia text,
 
 unique index (id)
@@ -182,7 +187,7 @@ unique index (id)
 );
 
 ##POPULANDO AS TABELAS
-
+Select * from tbl_noticias;
 
 ##SEXO
 insert into tbl_sexo(nome) values('Masculino');
@@ -212,8 +217,14 @@ insert into tbl_endereco(cep,logradouro,id_bairro,id_cidade)values('06266230','R
 ##ENDERECO
 ##USUARIOS
 insert into tbl_usuario
-(nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone)
-values('Maria De Lourdes','12345678910','5523743843','129302032','1970-09-13','declaração escolaridade','mariadelourdes@gmail.com',2,1,1);
+(nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone,area_de_atuacao,motivo_inscricao)
+values('Maria De Lourdes','12345678910','5523743843','129302032','1970-09-13','declaração escolaridade','mariadelourdes@gmail.com',2,1,1,'Professor','Gostaria de ajudar dando Aulas');
+insert into tbl_usuario
+(nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone,area_de_atuacao,motivo_inscricao)
+values('Ricardo','12345868910','552374123','78202032','1977-02-13','declaração escolaridade','ricardo@gmail.com',1,2,3,'Professor','Gostaria de ajudar dando Aulas');
+insert into tbl_usuario
+(nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone,area_de_atuacao,motivo_inscricao)
+values('Ricardo','12345868910','552374123','78202032','1977-02-13','declaração escolaridade','ricardo@gmail.com',1,2,3,'Doador','Gostaria de ajudar doando 2 cadeiras');
 ##USUARIOS
 ##MATERIAS
 insert into tbl_materias(nome)values('Língua Portuguesa');
@@ -221,17 +232,17 @@ insert into tbl_materias(nome)values('Língua Inglesa');
 insert into tbl_materias(nome)values('Sociologia');
 ##MATERIAS
 ##PROFESSOR
-insert into tbl_professor(horarios_disponiveis,id_usuario,id_materias)values('Das 900 as 1400',1,1);
+insert into tbl_professor(horarios_disponiveis,id_usuario,id_materias)values('Das 9:00 as 14:00',1,1);
 ##PROFESSOR
 ##AULAS
-insert into tbl_aulas(comeco_aula,termino_aula,id_materia,id_professor)values('1000','1200',1,1);
+insert into tbl_aulas(comeco_aula,termino_aula,id_materia,id_professor)values('10:00','12:00',1,1);
 ##AULAS
 insert into tbl_administrador(nome,email,senha)values('Testador Da Silva','testador@gmail.com.br','teste12345678');
 
 
 insert into tbl_noticias(titulo,nome_autor,descricao,capa_noticia,tema,data_noticia,corpo_noticia) 
 values(
-'Isso é um teste', 'Testador da Silva', 'É um teste, quer saber mais oque ','nao tem','teste','01062023',
+'Isso é um teste', 'Testador da Silva', 'É um teste, quer saber mais oque ?','nao tem','teste','01/06/2023',
 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
 Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
 when an unknown printer took a galley of type and scrambled it to make a type 
@@ -249,6 +260,32 @@ FROM tbl_aulas
 INNER JOIN tbl_materias ON tbl_materias.id = tbl_aulas.id_materia
 INNER JOIN tbl_professor ON tbl_professor.id = tbl_aulas.id_professor
 INNER JOIN tbl_usuario ON tbl_usuario.id = tbl_professor.id_usuario;
+
+select * from tbl_outros_funcionarios;
+
+##SELECT Doadores
+
+##SELECT Professor
+SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento,
+       tbl_usuario.declaracao_escolaridade, tbl_usuario.email,tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao ,tbl_professor.horarios_disponiveis,
+       tbl_materias.nome as materias_que_aplica, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade
+FROM tbl_usuario
+INNER JOIN tbl_professor ON tbl_usuario.id = tbl_professor.id_usuario
+INNER JOIN tbl_materias ON tbl_materias.id = tbl_professor.id_materias
+INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco
+INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id
+INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;
+
+SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento,
+       tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao,
+      tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade
+FROM tbl_usuario
+INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco
+INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id
+INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;
+
+
+
 
 
 show tables;

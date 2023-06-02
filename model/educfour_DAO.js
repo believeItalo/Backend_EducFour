@@ -212,8 +212,6 @@ const selectAllrsCity = async () => {
     }
 }
 
-
-
 const insertCity = async(dadosCity) => {
     let sql =`insert into tbl_cidade
     (nome)
@@ -231,7 +229,33 @@ const insertCity = async(dadosCity) => {
           }
     }
 
+    const selectUserTeacher = async () => {
 
+        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email,tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao ,tbl_professor.horarios_disponiveis, tbl_materias.nome as materias_que_aplica, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade FROM tbl_usuario INNER JOIN tbl_professor ON tbl_usuario.id = tbl_professor.id_usuario INNER JOIN tbl_materias ON tbl_materias.id = tbl_professor.id_materias INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;'
+        let rsTeacher = await prisma.$queryRawUnsafe(sql)
+    
+        if (rsTeacher.length > 0) {
+            return rsTeacher
+        }
+        else {
+    
+            return false
+        }
+    }
+
+    const selectUser = async () => {
+
+        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade FROM tbl_usuario INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;'
+        let rsTeacher = await prisma.$queryRawUnsafe(sql)
+    
+        if (rsTeacher.length > 0) {
+            return rsTeacher
+        }
+        else {
+    
+            return false
+        }
+    }
 
 
 
@@ -248,6 +272,8 @@ module.exports = {
     insertNeighborhood,
     selectAllrsNeighbor,
     insertCity,
-    selectAllrsCity
+    selectAllrsCity,
+    selectUserTeacher,
+    selectUser
     
 }

@@ -247,7 +247,38 @@ const inserirCidade = async (dadosCity) =>{
     }
 }
 
+const selecionarTodosProf = async () => {
 
+    let dadosProf = await educ_DAO.selectUserTeacher()
+    let dadosJson = {}
+
+    if(dadosProf){
+        dadosJson.status = 200
+        dadosJson.count = dadosProf.length
+        dadosJson.professores = dadosProf
+        return dadosJson
+    }
+    else{
+        dadosJson.status = 404
+    }
+
+}
+const selecionarTodosUsuarios = async () => {
+
+    let dadosUser = await educ_DAO.selectUser()
+    let dadosJson = {}
+
+    if(dadosUser){
+        dadosJson.status = 200
+        dadosJson.count = dadosUser.length
+        dadosJson.usuarios = dadosUser
+        return dadosJson
+    }
+    else{
+        dadosJson.status = 404
+    }
+
+}
 
 
 module.exports = {
@@ -263,8 +294,9 @@ module.exports = {
     inserirBairro,
     selecionarTodososBairro,
     selecionarTodasCidades,
-    inserirCidade 
-
+    inserirCidade,
+    selecionarTodosProf,
+    selecionarTodosUsuarios
     // inserirBairro
 }
 
