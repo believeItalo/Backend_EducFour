@@ -229,6 +229,6 @@ app.get('/v1/educ_four/employers', cors(), async function (request,response){
 
 });
 
-app.listen(5050, function () {
+app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')
 })

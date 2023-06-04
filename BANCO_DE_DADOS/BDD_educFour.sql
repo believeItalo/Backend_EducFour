@@ -224,7 +224,7 @@ insert into tbl_usuario
 values('Ricardo','12345868910','552374123','78202032','1977-02-13','declaração escolaridade','ricardo@gmail.com',1,2,3,'Professor','Gostaria de ajudar dando Aulas');
 insert into tbl_usuario
 (nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone,area_de_atuacao,motivo_inscricao)
-values('Ricardo','12345868910','552374123','78202032','1977-02-13','declaração escolaridade','ricardo@gmail.com',1,2,3,'Doador','Gostaria de ajudar doando 2 cadeiras');
+values('Ricardo','12345868910','552374123','78202032','1977-02-13','declaração escolaridade','ricardo@gmail.com',1,2,3,'Doador','Gostaria de ajudar trabalhando na empresa');
 ##USUARIOS
 ##MATERIAS
 insert into tbl_materias(nome)values('Língua Portuguesa');
@@ -239,6 +239,11 @@ insert into tbl_aulas(comeco_aula,termino_aula,id_materia,id_professor)values('1
 ##AULAS
 insert into tbl_administrador(nome,email,senha)values('Testador Da Silva','testador@gmail.com.br','teste12345678');
 
+show tables;
+select * from tbl_outros_funcionarios;
+select  * from tbl_usuario;
+
+insert into tbl_outros_funcionarios(horarios_disponiveis, id_usuario) values('das 14:00 até as 22:00', 3);
 
 insert into tbl_noticias(titulo,nome_autor,descricao,capa_noticia,tema,data_noticia,corpo_noticia) 
 values(
@@ -284,7 +289,31 @@ INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco
 INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id
 INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;
 
+select * from tbl_outros_funcionarios;
 
+SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento,
+       tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao,
+       tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade,
+       tbl_outros_funcionarios.horarios_disponiveis, tbl_outros_funcionarios.id_usuario
+FROM tbl_usuario
+INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco
+INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id
+INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id
+INNER JOIN tbl_outros_funcionarios ON tbl_outros_funcionarios.id_usuario = tbl_usuario.id;
+
+
+
+SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento,
+       tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao,
+      tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade
+FROM tbl_usuario
+INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco
+INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id
+INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;
+
+
+
+select * from tbl_professor;
 
 
 
