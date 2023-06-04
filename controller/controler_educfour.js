@@ -317,6 +317,21 @@ const selecionarTodosUsuarios = async () => {
 
 }
 
+const selecionarTodosOsOutrosFuncionarios = async () => {
+
+    let dadosFuncionarios = await educfour_DAO.selectOthersEmployers()
+    let dadosJson = {}
+    if(dadosFuncionarios){
+        dadosJson.status = 200
+        dadosJson.count = dadosFuncionarios.length
+        dadosJson.outros_funcionarios = dadosFuncionarios
+        return dadosJson
+    }
+    else{
+        dadosJson.status = 404
+    }
+}
+
 
 module.exports = {
     selecionarTodasAsNoticias,
@@ -335,7 +350,8 @@ module.exports = {
     selecionarTodosProf,
     selecionarTodosUsuarios,
     inserirEndereco,
-    selecionarTodosEndereco
+    selecionarTodosEndereco,
+    selecionarTodosOsOutrosFuncionarios
     // inserirBairro
 }
 

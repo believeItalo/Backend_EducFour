@@ -1,8 +1,7 @@
 var { PrismaClient } = require('@prisma/client');
 //instanciando classe do PrismaClient
 var prisma = new PrismaClient();
-
-
+ 
 const selectAllAdm = async () => {
 
     let sql = 'select * from tbl_administrador;'
@@ -86,7 +85,7 @@ const updateNews  = async function(dadosNews) {
        
     titulo       = '${dadosNews.titulo}',
     nome_autor   = '${dadosNews.nome_autor}',
-    descricao    = '${dadosNews.descricao}',
+    descricao    = '${dadosNews.descrissscao}',
     capa_noticia = '${dadosNews.capa_noticia}',
     tema         = '${dadosNews.tema}',
     data_noticia = '${dadosNews.data_noticia}',
@@ -287,9 +286,26 @@ const insertComplement = async(dadosaddress) => {
         }
     }
 
+    const selectOthersEmployers = async () => {
+
+        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade, tbl_outros_funcionarios.horarios_disponiveis, tbl_outros_funcionarios.id_usuario FROM tbl_usuario INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id INNER JOIN tbl_outros_funcionarios ON tbl_outros_funcionarios.id_usuario = tbl_usuario.id;'
+    
+        let rsEmployer = await prisma.$executeRawUnsafe(sql)
+        
+       
+        if(rsEmployer.length > 0){
+            return rsEmployer
+        }
+        else {
+            return false
+        }
+        
+    }
+
 
 
 module.exports = {
+    selectOthersEmployers,
     selectAllAdm,
     selectAllNews,
     insertNews,

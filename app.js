@@ -219,6 +219,16 @@ app.get('/v1/educ_four/users', cors(), async function (request,response){
 
 });
 
-app.listen(8080, function () {
+app.get('/v1/educ_four/employers', cors(), async function (request,response){
+
+   let dados = await controllerEducFour.selecionarTodosOsOutrosFuncionarios()
+   
+  
+   response.status(200)
+   response.json(dados)
+
+});
+
+app.listen(5050, function () {
    console.log('servidor aguardado requisições na porta 8080')
 })
