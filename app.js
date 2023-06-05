@@ -127,6 +127,7 @@ app.put('/v1/educ_four/updateadm/:id', cors(), bodyJson, async function(request,
 //ADMINISTRADORES
 
 //AULAS
+
 app.get('/v1/educ_four/getaulas', cors(), bodyJson, async function (request, response) {
 
    let dados = await controllerEducFour.selecionarTodasAsAulas()

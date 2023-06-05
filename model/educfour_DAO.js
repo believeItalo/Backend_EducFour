@@ -260,7 +260,7 @@ const insertComplement = async(dadosaddress) => {
 
     const selectUserTeacher = async () => {
 
-        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email,tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao ,tbl_professor.horarios_disponiveis, tbl_materias.nome as materias_que_aplica, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade FROM tbl_usuario INNER JOIN tbl_professor ON tbl_usuario.id = tbl_professor.id_usuario INNER JOIN tbl_materias ON tbl_materias.id = tbl_professor.id_materias INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;'
+        let sql = 'SELECT p.id, p.nome, p.cnpj, p.cpf, p.rg, p.data_nascimento, p.declaracao_escolaridade, p.email, p.area_de_atuacao, p.horarios,s.nome AS sexo, e.cep, e.logradouro, t.numero AS telefone FROM tbl_professor p INNER JOIN tbl_sexo s ON p.id_sexo = s.id INNER JOIN tbl_endereco e ON p.id_endereco = e.id INNER JOIN tbl_telefone t ON p.id_telefone = t.id;'
         let rsTeacher = await prisma.$queryRawUnsafe(sql)
     
         if (rsTeacher.length > 0) {
@@ -274,7 +274,7 @@ const insertComplement = async(dadosaddress) => {
 
     const selectUser = async () => {
 
-        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade FROM tbl_usuario INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;'
+        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.horarios, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade FROM tbl_usuario INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;'
         let rsTeacher = await prisma.$queryRawUnsafe(sql)
     
         if (rsTeacher.length > 0) {
@@ -286,26 +286,10 @@ const insertComplement = async(dadosaddress) => {
         }
     }
 
-    const selectOthersEmployers = async () => {
-
-        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.motivo_inscricao, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade, tbl_outros_funcionarios.horarios_disponiveis, tbl_outros_funcionarios.id_usuario FROM tbl_usuario INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id INNER JOIN tbl_outros_funcionarios ON tbl_outros_funcionarios.id_usuario = tbl_usuario.id;'
-    
-        let rsEmployer = await prisma.$executeRawUnsafe(sql)
-        
-       
-        if(rsEmployer.length > 0){
-            return rsEmployer
-        }
-        else {
-            return false
-        }
-        
-    }
 
 
 
 module.exports = {
-    selectOthersEmployers,
     selectAllAdm,
     selectAllNews,
     insertNews,
