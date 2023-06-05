@@ -260,7 +260,7 @@ const insertComplement = async(dadosaddress) => {
 
     const selectUserTeacher = async () => {
 
-        let sql = 'SELECT p.id, p.nome, p.cnpj, p.cpf, p.rg, p.data_nascimento, p.declaracao_escolaridade, p.email, p.area_de_atuacao, p.horarios,s.nome AS sexo, e.cep, e.logradouro, t.numero AS telefone FROM tbl_professor p INNER JOIN tbl_sexo s ON p.id_sexo = s.id INNER JOIN tbl_endereco e ON p.id_endereco = e.id INNER JOIN tbl_telefone t ON p.id_telefone = t.id;'
+        let sql = 'SELECT p.id, p.nome, p.cnpj, p.cpf, p.rg, p.data_nascimento, p.declaracao_escolaridade, p.email, p.area_de_atuacao, e.cep, e.logradouro, t.numero AS telefone FROM tbl_professor p  INNER JOIN tbl_endereco e ON p.id_endereco = e.id INNER JOIN tbl_telefone t ON p.id_telefone = t.id;'
         let rsTeacher = await prisma.$queryRawUnsafe(sql)
     
         if (rsTeacher.length > 0) {
@@ -271,19 +271,19 @@ const insertComplement = async(dadosaddress) => {
             return false
         }
     }
-    const insertUser = async(dadosUser) => {
+    // const insertUser = async(dadosUser) => {
    
-        let sql = `insert into tbl_usuario
-        (nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone,area_de_atuacao,horarios)
-        values('${dadosUser.nome}','${dadosUser.cnpj}','${dadosUser.cpf}','${dadosUser.rg}','${dadosUser.data_nascimento}','${dadosUser.declaracao_escolaridade}','${dadosUser.email}',1,2,3,'Gostaria de ajudar trabalhando na limpeza','das 14hrs até as 16hrs');`;
-              let rsEnd = await prisma.$queryRawUnsafe(sql)
-              if(rsEnd) {
-                  return true;
-              }
-              else{
-                 return false;
-              }
-        }
+    //     let sql = `insert into tbl_usuario
+    //     (nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_endereco,id_telefone,area_de_atuacao,horarios)
+    //     values('${dadosUser.nome}','${dadosUser.cnpj}','${dadosUser.cpf}','${dadosUser.rg}','${dadosUser.data_nascimento}','${dadosUser.declaracao_escolaridade}','${dadosUser.email}',1,2,3,'Gostaria de ajudar trabalhando na limpeza','das 14hrs até as 16hrs');`;
+    //           let rsEnd = await prisma.$queryRawUnsafe(sql)
+    //           if(rsEnd) {
+    //               return true;
+    //           }
+    //           else{
+    //              return false;
+    //           }
+    //     }
     
     
 
