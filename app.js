@@ -28,7 +28,6 @@ app.get('/v1/educ_four/news/get', cors(), async function (request,response){
 
    response.status(200)
    response.json(dados)
-
    
 })
 
