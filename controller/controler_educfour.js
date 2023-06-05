@@ -266,8 +266,6 @@ const selecionarTodosEndereco = async () => {
 
 const inserirEndereco = async (dadosaddress) =>{
 
-
-
     if(dadosaddress.cep == '' || dadosaddress.cep == undefined || dadosaddress.cep  > 45 ||
        dadosaddress.logradouro == '' || dadosaddress.logradouro == undefined || dadosaddress.logradouro > 70
     ){
@@ -282,7 +280,6 @@ const inserirEndereco = async (dadosaddress) =>{
 
 
 }
-
 
 const selecionarTodosProf = async () => {
 
@@ -317,20 +314,6 @@ const selecionarTodosUsuarios = async () => {
 
 }
 
-const selecionarTodosOsOutrosFuncionarios = async () => {
-
-    let dadosFuncionarios = await educfour_DAO.selectOthersEmployers()
-    let dadosJson = {}
-    if(dadosFuncionarios){
-        dadosJson.status = 200
-        dadosJson.count = dadosFuncionarios.length
-        dadosJson.outros_funcionarios = dadosFuncionarios
-        return dadosJson
-    }
-    else{
-        dadosJson.status = 404
-    }
-}
 
 
 module.exports = {
@@ -351,7 +334,6 @@ module.exports = {
     selecionarTodosUsuarios,
     inserirEndereco,
     selecionarTodosEndereco,
-    selecionarTodosOsOutrosFuncionarios
     // inserirBairro
 }
 

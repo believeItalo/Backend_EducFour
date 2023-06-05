@@ -149,7 +149,7 @@ const deleteNews = async function (id) {
 
 const selectAllCLasses = async () => {
 
-    let sql = 'SELECT tbl_aulas.comeco_aula, tbl_aulas.termino_aula,tbl_materias.nome AS nome_materia,tbl_usuario.nome as nome_professor FROM tbl_aulas INNER JOIN tbl_materias ON tbl_materias.id = tbl_aulas.id_materia INNER JOIN tbl_professor ON tbl_professor.id = tbl_aulas.id_professor INNER JOIN tbl_usuario ON tbl_usuario.id = tbl_professor.id_usuario'
+    let sql = 'SELECT p.id, p.nome, p.area_de_atuacao, p.horarios, a.comeco_aula, a.termino_aula FROM tbl_professor p INNER JOIN tbl_aulas a ON p.id = a.id_professor;'
     let rsClasses = await prisma.$queryRawUnsafe(sql)
 
     if (rsClasses.length > 0) {
@@ -271,6 +271,21 @@ const insertComplement = async(dadosaddress) => {
             return false
         }
     }
+    const insertUser = async(dadosUser) => {
+   
+        let sql = `insert into tbl_usuario
+        (nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_sexo,id_endereco,id_telefone,area_de_atuacao,horarios)
+        values('${dadosUser.nome}','${dadosUser.cnpj}','${dadosUser.cpf}','${dadosUser.rg}','${dadosUser.data_nascimento}','${dadosUser.declaracao_escolaridade}','${dadosUser.email}',1,2,3,'Gostaria de ajudar trabalhando na limpeza','das 14hrs até as 16hrs');`;
+              let rsEnd = await prisma.$queryRawUnsafe(sql)
+              if(rsEnd) {
+                  return true;
+              }
+              else{
+                 return false;
+              }
+        }
+    
+    
 
     const selectUser = async () => {
 
@@ -304,7 +319,8 @@ module.exports = {
     insertCity,
     selectAllrsCity,
     selectUserTeacher,
-    selectUser,selectAllrsComplement,
+    selectUser,
+    selectAllrsComplement,
     insertComplement
     
 }

@@ -23,7 +23,7 @@ const bodyJson = bodyParser.json();
 var controllerEducFour = require('./controller/controler_educfour')
 
 //NOTICIAS
-app.get('/v1/educ_four/news', cors(), async function (request,response){
+app.get('/v1/educ_four/news/get', cors(), async function (request,response){
    let dados = await controllerEducFour.selecionarTodasAsNoticias()
 
    response.status(200)
@@ -32,17 +32,7 @@ app.get('/v1/educ_four/news', cors(), async function (request,response){
    
 })
 
-app.put('/v1/educ_four/update/:id', cors(), bodyJson, async function(request, response) {    
-  let dados = request.body
-  let idNews = request.params.id
-  let resultUpdateDados = await controllerEducFour.atualizarNoticias(dados, idNews)
-  
-  response.status(resultUpdateDados.status)
-  response.json(resultUpdateDados)
-
-});
-
-app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,response){
+app.post('/v1/educ_four/news/post', cors(), bodyJson, async function (request,response){
    let contentType = request.headers['content-type'];
    if(String(contentType).toLowerCase() == 'application/json'){
 
@@ -59,7 +49,7 @@ app.post('/v1/educ_four/postnews', cors(), bodyJson, async function (request,res
    }
    
 })
-app.delete('/v1/educ_four/deletenews/:id', cors(), async function (request, response) {
+app.delete('/v1/educ_four/news/delete/:id', cors(), async function (request, response) {
 
    let idNot = request.params.id 
    let resultDeleteDados = await controllerEducFour.deletarNoticia(idNot)
@@ -73,7 +63,7 @@ app.delete('/v1/educ_four/deletenews/:id', cors(), async function (request, resp
 //ADMINISTRADORES
 
 //POST ADM
-app.post('/v1/educ_four/postadm', cors(), bodyJson, async function (request, response) {
+app.post('/v1/educ_four/adm/post', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
    if (String(contentType).toLowerCase() == 'application/json') {
       let dadosBody = request.body;
@@ -88,7 +78,7 @@ app.post('/v1/educ_four/postadm', cors(), bodyJson, async function (request, res
 })
 
 //GET ADM
-app.get('/v1/educ_four/getadm', cors(), bodyJson, async function (request, response) {
+app.get('/v1/educ_four/adm/get', cors(), bodyJson, async function (request, response) {
 
    let dados = await controllerEducFour.selecionarTodososAdms()
 
@@ -98,7 +88,7 @@ app.get('/v1/educ_four/getadm', cors(), bodyJson, async function (request, respo
 })
 
 //DELETE ADM
-app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, response) {
+app.delete('/v1/educ_four/adm/delete/:id', cors(), async function (request, response) {
 
    let idAdm = request.params.id 
    let resultDeleteDados = await controllerEducFour.deletarAdm(idAdm)
@@ -110,16 +100,13 @@ app.delete('/v1/educ_four/deleteadm/:id', cors(), async function (request, respo
 
 //PUT ADM
 
-app.put('/v1/educ_four/updateadm/:id', cors(), bodyJson, async function(request, response) {  
+app.put('/v1/educ_four/adm/update/:id', cors(), bodyJson, async function(request, response) {  
    
   let dados = request.body
   let idAdm = request.params.id
   let resultUpdateDados = await controllerEducFour.atualizarAdm(dados, idAdm)
   response.status(resultUpdateDados.status)
   response.json(resultUpdateDados)
-
-  
-  
 
 });
 
@@ -128,7 +115,7 @@ app.put('/v1/educ_four/updateadm/:id', cors(), bodyJson, async function(request,
 
 //AULAS
 
-app.get('/v1/educ_four/getaulas', cors(), bodyJson, async function (request, response) {
+app.get('/v1/educ_four/aulas/get', cors(), bodyJson, async function (request, response) {
 
    let dados = await controllerEducFour.selecionarTodasAsAulas()
 
@@ -136,14 +123,14 @@ app.get('/v1/educ_four/getaulas', cors(), bodyJson, async function (request, res
    response.json(dados)
 
 })
-app.get('/v1/educ_four/neighborhood', cors(), async function (request,response){
+app.get('/v1/educ_four/neighborhood/get', cors(), async function (request,response){
    let dados = await controllerEducFour.selecionarTodososBairro()
 
    response.status(200)
    response.json(dados)
 
 });
-app.post('/v1/educ_four/postneighborhood', cors(), bodyJson, async function (request, response) {
+app.post('/v1/educ_four/neighborhood/post', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
    if (String(contentType).toLowerCase() == 'application/json') {
       let dadosBody = request.body;
@@ -158,14 +145,14 @@ app.post('/v1/educ_four/postneighborhood', cors(), bodyJson, async function (req
 })
 
 //CIDADE
-app.get('/v1/educ_four/city', cors(), async function (request,response){
+app.get('/v1/educ_four/city/get', cors(), async function (request,response){
    let dados = await controllerEducFour.selecionarTodasCidades()
 
    response.status(200)
    response.json(dados)
  
 });
-app.post('/v1/educ_four/postcity', cors(), bodyJson, async function (request, response) {
+app.post('/v1/educ_four/city/post', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
    if (String(contentType).toLowerCase() == 'application/json') {
       let dadosBody = request.body;
@@ -180,14 +167,14 @@ app.post('/v1/educ_four/postcity', cors(), bodyJson, async function (request, re
 })
 
 //Endereco
-app.get('/v1/educ_four/address', cors(), async function (request,response){
+app.get('/v1/educ_four/address/get', cors(), async function (request,response){
    let dados = await controllerEducFour.selecionarTodosEndereco()
 
    response.status(200)
    response.json(dados)
  
 });
-app.post('/v1/educ_four/postaddress', cors(), bodyJson, async function (request, response) {
+app.post('/v1/educ_four/address/post', cors(), bodyJson, async function (request, response) {
    let contentType = request.headers['content-type'];
    if (String(contentType).toLowerCase() == 'application/json') {
       let dadosBody = request.body;
@@ -202,7 +189,7 @@ app.post('/v1/educ_four/postaddress', cors(), bodyJson, async function (request,
 })
 
 //PROFESSOR
-app.get('/v1/educ_four/prof', cors(), async function (request,response){
+app.get('/v1/educ_four/prof/get', cors(), async function (request,response){
 
    let dados = await controllerEducFour.selecionarTodosProf()
    
@@ -210,21 +197,12 @@ app.get('/v1/educ_four/prof', cors(), async function (request,response){
    response.json(dados)
 
 });
+
 //USERs
-app.get('/v1/educ_four/users', cors(), async function (request,response){
+app.get('/v1/educ_four/users/get', cors(), async function (request,response){
 
    let dados = await controllerEducFour.selecionarTodosUsuarios()
    
-   response.status(200)
-   response.json(dados)
-
-});
-
-app.get('/v1/educ_four/employers', cors(), async function (request,response){
-
-   let dados = await controllerEducFour.selecionarTodosOsOutrosFuncionarios()
-   
-  
    response.status(200)
    response.json(dados)
 
