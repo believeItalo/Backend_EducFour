@@ -314,6 +314,35 @@ const selecionarTodosUsuarios = async () => {
 
 }
 
+//TELEFONE
+
+const selecionarTodasTelefones = async () => {
+
+    let dadosTelefone= await educfour_DAO.selectAllrsTell()
+
+    let dadosJson = {}
+
+    if (dadosTelefone) {
+        dadosJson.status = 200
+        dadosJson.telefone = dadosTelefone
+        return dadosJson
+    }
+    else {
+        return message.ERROR_NOT_FOUND
+    }
+}
+
+const inserirTelefone = async (dadosTell) =>{
+    if(dadosTell.numero == '' || dadosTell.numero == undefined || dadosTell.numero.length> 45
+    ){
+        return message.ERROR_REQUIRED_DATA
+
+    }else {
+        let status = await educ_DAO.insertTell(dadosTell)
+
+        return message.CREATED_ITEM
+    }
+}
 
 
 module.exports = {
@@ -334,6 +363,9 @@ module.exports = {
     selecionarTodosUsuarios,
     inserirEndereco,
     selecionarTodosEndereco,
-    // inserirBairro
+    selecionarTodasTelefones,
+    inserirTelefone
+
+    
 }
 

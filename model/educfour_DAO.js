@@ -300,7 +300,35 @@ const insertComplement = async(dadosaddress) => {
             return false
         }
     }
+//Telefone
+const selectAllrsTell = async () => {
 
+    let sql = 'select * from tbl_telefone;'
+    let rsTell = await prisma.$queryRawUnsafe(sql)
+
+    if (rsTell.length > 0) {
+        return rsTell
+    }
+    else {
+
+        return false
+    }
+}
+const insertTell = async(dadosTell) => {
+    let sql =`insert into tbl_telefone
+    (numero)
+        values
+        ('${dadosTell.numero}') `;
+          let rsTell = await prisma.$queryRawUnsafe(sql)
+
+
+          if(rsTell) {
+              return true;
+          }
+          else{
+             return false;
+          }
+    }
 
 
 
@@ -321,6 +349,7 @@ module.exports = {
     selectUserTeacher,
     selectUser,
     selectAllrsComplement,
-    insertComplement
-    
+    insertComplement,
+    selectAllrsTell,
+    insertTell
 }

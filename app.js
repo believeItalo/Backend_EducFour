@@ -122,6 +122,8 @@ app.get('/v1/educ_four/aulas/get', cors(), bodyJson, async function (request, re
    response.json(dados)
 
 })
+
+//Bairro
 app.get('/v1/educ_four/neighborhood/get', cors(), async function (request,response){
    let dados = await controllerEducFour.selecionarTodososBairro()
 
@@ -209,4 +211,26 @@ app.get('/v1/educ_four/users/get', cors(), async function (request,response){
 
 app.listen(8080, function () {
    console.log('servidor aguardado requisições na porta 8080')
+})
+
+//TELL
+app.get('/v1/educ_four/telephone/get', cors(), async function (request,response){
+   let dados = await controllerEducFour.selecionarTodasTelefones()
+
+   response.status(200)
+   response.json(dados)
+ 
+});
+app.post('/v1/educ_four/telephone/post', cors(), bodyJson, async function (request, response) {
+   let contentType = request.headers['content-type'];
+   if (String(contentType).toLowerCase() == 'application/json') {
+      let dadosBody = request.body;
+      let resultInsertTelephone = await controllerEducFour.inserirTelefone(dadosBody)
+      response.status(resultInsertTelephone.status)
+      response.json(resultInsertTelephone)
+
+   } else {
+      response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+      response.json(message.ERROR_INVALID_CONTENT_TYPE)
+   }
 })
