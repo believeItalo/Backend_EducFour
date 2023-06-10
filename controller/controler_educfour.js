@@ -316,6 +316,7 @@ const selecionarTodosUsuarios = async () => {
 
 const inserirUser = async function (dadosUser) {
     if (dadosUser.nome == '' || dadosUser.nome == undefined || dadosUser.nome.length > 90 ||
+    dadosUser.cpf == ''|| dadosUser.cpf == undefined || dadosUser.cnpj == ' ' || dadosUser.cnpj == undefined ||
     dadosUser.rg == '' || dadosUser.rg == undefined || dadosUser.rg > 45 ||
     dadosUser.data_nascimento == '' || dadosUser.data_nascimento == undefined ||
     dadosUser.declaracao_escolaridade == ' ' || dadosUser.declaracao_escolaridade == undefined || dadosUser.declaracao_escolaridade > 100 ||
@@ -330,14 +331,23 @@ const inserirUser = async function (dadosUser) {
     dadosUser.telefone == ' ' || dadosUser.telefone == undefined || dadosUser.telefone > 45
 
     ) {
-
         return message.ERROR_REQUIRED_DATA
     }
     else {
-        let status = await educ_DAO.inserirUser(dadosUser)
+    let status = await educ_DAO.insertUser(dadosUser)
 
-        return message.CREATED_ITEM
+    if(status){
+        let dadosJson = {} 
+
+        dadosJson.status = message.UPDATED_ITEM.status
+        dadosJson.new = dadosUser
+
+        return dadosJson
     }
+    else
+        return message.ERROR_INTERNAL_SERVER
+}
+    
 }
 // //TELEFONE
 

@@ -293,8 +293,8 @@ const deleteNews = async function (id) {
         '${dadosUser.rg}',
         '${dadosUser.data_nascimento}',
         '${dadosUser.declaracao_escolaridade}',
-        '${dadosUser.email}',${dadosUser.area_de_atuacao}
-        ,${dadosUser.motivo_inscricao},${dadosUser.horarios_disponiveis},
+        '${dadosUser.email}',${dadosUser.area_de_atuacao},${dadosUser.horarios_disponiveis},
+        ,${dadosUser.motivo_inscricao}
         ${dadosUser.cep},
         ${dadosUser.logradouro},${dadosUser.bairro},
         ${dadosUser.cidade},${dadosUser.telefone});`;

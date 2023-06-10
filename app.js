@@ -133,6 +133,20 @@ app.post('/v1/educ_four/users/post', cors(), bodyJson, async function (request,r
       response.json(message.ERROR_INVALID_CONTENT_TYPE)
    }
    
+   //POST ADM
+// app.post('/v1/educ_four/adm/post', cors(), bodyJson, async function (request, response) {
+//    let contentType = request.headers['content-type'];
+//    if (String(contentType).toLowerCase() == 'application/json') {
+//       let dadosBody = request.body;
+//       let resultInsertAdm = await controllerEducFour.inserirAdm(dadosBody)
+//       response.status(resultInsertAdm.status)
+//       response.json(resultInsertAdm)
+
+//    } else {
+//       response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+//       response.json(message.ERROR_INVALID_CONTENT_TYPE)
+//    }
+// })
 })
 
 
@@ -269,6 +283,6 @@ app.post('/v1/educ_four/users/post', cors(), bodyJson, async function (request,r
 //    }
 // })
 
-app.listen(8080, function () {
+app.listen(5050, function () {
    console.log('servidor aguardado requisições na porta 8080')
 })
