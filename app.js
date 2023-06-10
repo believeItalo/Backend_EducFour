@@ -97,7 +97,6 @@ app.delete('/v1/educ_four/adm/delete/:id', cors(), async function (request, resp
 
 })
 
-//PUT ADM
 
 app.put('/v1/educ_four/adm/update/:id', cors(), bodyJson, async function(request, response) {  
    
@@ -109,97 +108,7 @@ app.put('/v1/educ_four/adm/update/:id', cors(), bodyJson, async function(request
 
 });
 
-
 //ADMINISTRADORES
-
-//AULAS
-
-app.get('/v1/educ_four/aulas/get', cors(), bodyJson, async function (request, response) {
-
-   let dados = await controllerEducFour.selecionarTodasAsAulas()
-
-   response.status(200)
-   response.json(dados)
-
-})
-
-//Bairro
-app.get('/v1/educ_four/neighborhood/get', cors(), async function (request,response){
-   let dados = await controllerEducFour.selecionarTodososBairro()
-
-   response.status(200)
-   response.json(dados)
-
-});
-app.post('/v1/educ_four/neighborhood/post', cors(), bodyJson, async function (request, response) {
-   let contentType = request.headers['content-type'];
-   if (String(contentType).toLowerCase() == 'application/json') {
-      let dadosBody = request.body;
-      let resultInsertNeighbor = await controllerEducFour.inserirBairro(dadosBody)
-      response.status(resultInsertNeighbor.status)
-      response.json(resultInsertNeighbor)
-
-   } else {
-      response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
-      response.json(message.ERROR_INVALID_CONTENT_TYPE)
-   }
-})
-
-//CIDADE
-app.get('/v1/educ_four/city/get', cors(), async function (request,response){
-   let dados = await controllerEducFour.selecionarTodasCidades()
-
-   response.status(200)
-   response.json(dados)
- 
-});
-app.post('/v1/educ_four/city/post', cors(), bodyJson, async function (request, response) {
-   let contentType = request.headers['content-type'];
-   if (String(contentType).toLowerCase() == 'application/json') {
-      let dadosBody = request.body;
-      let resultInsertCity = await controllerEducFour.inserirCidade(dadosBody)
-      response.status(resultInsertCity.status)
-      response.json(resultInsertCity)
-
-   } else {
-      response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
-      response.json(message.ERROR_INVALID_CONTENT_TYPE)
-   }
-})
-
-//Endereco
-app.get('/v1/educ_four/address/get', cors(), async function (request,response){
-   let dados = await controllerEducFour.selecionarTodosEndereco()
-
-   response.status(200)
-   response.json(dados)
- 
-});
-app.post('/v1/educ_four/address/post', cors(), bodyJson, async function (request, response) {
-   let contentType = request.headers['content-type'];
-   if (String(contentType).toLowerCase() == 'application/json') {
-      let dadosBody = request.body;
-      let resultInsertAddress = await controllerEducFour.inserirEndereco(dadosBody)
-      response.status(resultInsertAddress.status)
-      response.json(resultInsertAddress)
-
-   } else {
-      response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
-      response.json(message.ERROR_INVALID_CONTENT_TYPE)
-   }
-})
-
-//PROFESSOR
-app.get('/v1/educ_four/prof/get', cors(), async function (request,response){
-
-   let dados = await controllerEducFour.selecionarTodosProf()
-   
-   response.status(200)
-   response.json(dados)
-
-});
-
-//USERs
 app.get('/v1/educ_four/users/get', cors(), async function (request,response){
 
    let dados = await controllerEducFour.selecionarTodosUsuarios()
@@ -208,29 +117,158 @@ app.get('/v1/educ_four/users/get', cors(), async function (request,response){
    response.json(dados)
 
 });
-
-app.listen(8080, function () {
-   console.log('servidor aguardado requisições na porta 8080')
-})
-
-//TELL
-app.get('/v1/educ_four/telephone/get', cors(), async function (request,response){
-   let dados = await controllerEducFour.selecionarTodasTelefones()
-
-   response.status(200)
-   response.json(dados)
- 
-});
-app.post('/v1/educ_four/telephone/post', cors(), bodyJson, async function (request, response) {
+app.post('/v1/educ_four/users/post', cors(), bodyJson, async function (request,response){
    let contentType = request.headers['content-type'];
-   if (String(contentType).toLowerCase() == 'application/json') {
-      let dadosBody = request.body;
-      let resultInsertTelephone = await controllerEducFour.inserirTelefone(dadosBody)
-      response.status(resultInsertTelephone.status)
-      response.json(resultInsertTelephone)
+   if(String(contentType).toLowerCase() == 'application/json'){
 
-   } else {
+      let dadosBody = request.body;
+      let resultInsertUser = await controllerEducFour.inserirUser(dadosBody)
+      response.status(resultInsertUser.status)
+      response.json(resultInsertUser)
+      console.log(dadosBody);
+      
+   }
+   else{
       response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
       response.json(message.ERROR_INVALID_CONTENT_TYPE)
    }
+   
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //AULAS
+
+// app.get('/v1/educ_four/aulas/get', cors(), bodyJson, async function (request, response) {
+
+//    let dados = await controllerEducFour.selecionarTodasAsAulas()
+
+//    response.status(200)
+//    response.json(dados)
+
+// })
+
+// //Bairro
+// app.get('/v1/educ_four/neighborhood/get', cors(), async function (request,response){
+//    let dados = await controllerEducFour.selecionarTodososBairro()
+
+//    response.status(200)
+//    response.json(dados)
+
+// });
+// app.post('/v1/educ_four/neighborhood/post', cors(), bodyJson, async function (request, response) {
+//    let contentType = request.headers['content-type'];
+//    if (String(contentType).toLowerCase() == 'application/json') {
+//       let dadosBody = request.body;
+//       let resultInsertNeighbor = await controllerEducFour.inserirBairro(dadosBody)
+//       response.status(resultInsertNeighbor.status)
+//       response.json(resultInsertNeighbor)
+
+//    } else {
+//       response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+//       response.json(message.ERROR_INVALID_CONTENT_TYPE)
+//    }
+// })
+
+// //CIDADE
+// app.get('/v1/educ_four/city/get', cors(), async function (request,response){
+//    let dados = await controllerEducFour.selecionarTodasCidades()
+
+//    response.status(200)
+//    response.json(dados)
+ 
+// });
+// app.post('/v1/educ_four/city/post', cors(), bodyJson, async function (request, response) {
+//    let contentType = request.headers['content-type'];
+//    if (String(contentType).toLowerCase() == 'application/json') {
+//       let dadosBody = request.body;
+//       let resultInsertCity = await controllerEducFour.inserirCidade(dadosBody)
+//       response.status(resultInsertCity.status)
+//       response.json(resultInsertCity)
+
+//    } else {
+//       response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+//       response.json(message.ERROR_INVALID_CONTENT_TYPE)
+//    }
+// })
+
+// //Endereco
+// app.get('/v1/educ_four/address/get', cors(), async function (request,response){
+//    let dados = await controllerEducFour.selecionarTodosEndereco()
+
+//    response.status(200)
+//    response.json(dados)
+ 
+// });
+// app.post('/v1/educ_four/address/post', cors(), bodyJson, async function (request, response) {
+//    let contentType = request.headers['content-type'];
+//    if (String(contentType).toLowerCase() == 'application/json') {
+//       let dadosBody = request.body;
+//       let resultInsertAddress = await controllerEducFour.inserirEndereco(dadosBody)
+//       response.status(resultInsertAddress.status)
+//       response.json(resultInsertAddress)
+
+//    } else {
+//       response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+//       response.json(message.ERROR_INVALID_CONTENT_TYPE)
+//    }
+// })
+
+// //PROFESSOR
+// app.get('/v1/educ_four/prof/get', cors(), async function (request,response){
+
+//    let dados = await controllerEducFour.selecionarTodosProf()
+   
+//    response.status(200)
+//    response.json(dados)
+
+// });
+
+//USERs
+
+
+//TELL
+// app.get('/v1/educ_four/telephone/get', cors(), async function (request,response){
+//    let dados = await controllerEducFour.selecionarTodasTelefones()
+
+//    response.status(200)
+//    response.json(dados)
+ 
+// });
+// // app.post('/v1/educ_four/telephone/post', cors(), bodyJson, async function (request, response) {
+//    let contentType = request.headers['content-type'];
+//    if (String(contentType).toLowerCase() == 'application/json') {
+//       let dadosBody = request.body;
+//       let resultInsertTelephone = await controllerEducFour.inserirTelefone(dadosBody)
+//       response.status(resultInsertTelephone.status)
+//       response.json(resultInsertTelephone)
+
+//    } else {
+//       response.status(message.ERROR_INVALID_CONTENT_TYPE.status)
+//       response.json(message.ERROR_INVALID_CONTENT_TYPE)
+//    }
+// })
+
+app.listen(8080, function () {
+   console.log('servidor aguardado requisições na porta 8080')
 })

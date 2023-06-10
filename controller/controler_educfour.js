@@ -170,133 +170,133 @@ const atualizarNoticias = async (dadosNews, idNew) =>{
         return message.ERROR_INTERNAL_SERVER
 }
 }
-//AULAS
-const selecionarTodasAsAulas = async () => {
+// //AULAS
+// const selecionarTodasAsAulas = async () => {
 
-    let dadosClasses = await educ_DAO.selectAllCLasses()
-    let dadosJSon = {}
+//     let dadosClasses = await educ_DAO.selectAllCLasses()
+//     let dadosJSon = {}
 
-    if (dadosClasses) {
-        //retorna dados da requisicao
-        dadosJSon.status = 200
-        // retorna todos os registros
-        dadosJSon.count = dadosClasses.length
-        dadosJSon.aulas = dadosClasses
-        return dadosJSon
-    } else {
-        dadosJSon.status = 404
-    }
-}
+//     if (dadosClasses) {
+//         //retorna dados da requisicao
+//         dadosJSon.status = 200
+//         // retorna todos os registros
+//         dadosJSon.count = dadosClasses.length
+//         dadosJSon.aulas = dadosClasses
+//         return dadosJSon
+//     } else {
+//         dadosJSon.status = 404
+//     }
+// }
 
-//BAIRRO
-const selecionarTodososBairro = async () => {
+// //BAIRRO
+// const selecionarTodososBairro = async () => {
 
-    let dadosBairro = await educfour_DAO.selectAllrsNeighbor()
+//     let dadosBairro = await educfour_DAO.selectAllrsNeighbor()
 
-    let dadosJson = {}
+//     let dadosJson = {}
 
-    if (dadosBairro) {
-        dadosJson.status = 200
-        dadosJson.bairro = dadosBairro
-        return dadosJson
-    }
-    else {
-        return message.ERROR_NOT_FOUND
-    }
-}
+//     if (dadosBairro) {
+//         dadosJson.status = 200
+//         dadosJson.bairro = dadosBairro
+//         return dadosJson
+//     }
+//     else {
+//         return message.ERROR_NOT_FOUND
+//     }
+// }
 
-const inserirBairro = async (dadosNeighbor) =>{
-    if(dadosNeighbor.nome == '' || dadosNeighbor.nome == undefined || dadosNeighbor.nome.length > 55
-    ){
-        return message.ERROR_REQUIRED_DATA
+// const inserirBairro = async (dadosNeighbor) =>{
+//     if(dadosNeighbor.nome == '' || dadosNeighbor.nome == undefined || dadosNeighbor.nome.length > 55
+//     ){
+//         return message.ERROR_REQUIRED_DATA
 
-    }else {
-        let status = await educ_DAO.insertNeighborhood(dadosNeighbor)
+//     }else {
+//         let status = await educ_DAO.insertNeighborhood(dadosNeighbor)
 
-        return message.CREATED_ITEM
-    }
-}
+//         return message.CREATED_ITEM
+//     }
+// }
 
-//CIDADE
+// //CIDADE
 
-const selecionarTodasCidades = async () => {
+// const selecionarTodasCidades = async () => {
 
-    let dadosCidade = await educfour_DAO.selectAllrsCity()
+//     let dadosCidade = await educfour_DAO.selectAllrsCity()
 
-    let dadosJson = {}
+//     let dadosJson = {}
 
-    if (dadosCidade) {
-        dadosJson.status = 200
-        dadosJson.cidade = dadosCidade
-        return dadosJson
-    }
-    else {
-        return message.ERROR_NOT_FOUND
-    }
-}
+//     if (dadosCidade) {
+//         dadosJson.status = 200
+//         dadosJson.cidade = dadosCidade
+//         return dadosJson
+//     }
+//     else {
+//         return message.ERROR_NOT_FOUND
+//     }
+// }
 
-const inserirCidade = async (dadosCity) =>{
-    if(dadosCity.nome == '' || dadosCity.nome == undefined || dadosCity.nome > 55
-    ){
-        return message.ERROR_REQUIRED_DATA
+// const inserirCidade = async (dadosCity) =>{
+//     if(dadosCity.nome == '' || dadosCity.nome == undefined || dadosCity.nome > 55
+//     ){
+//         return message.ERROR_REQUIRED_DATA
 
-    }else {
-        let status = await educ_DAO.insertCity(dadosCity)
+//     }else {
+//         let status = await educ_DAO.insertCity(dadosCity)
 
-        return message.CREATED_ITEM
-    }
-}
+//         return message.CREATED_ITEM
+//     }
+// }
 
 //ENDERECO
-const selecionarTodosEndereco = async () => {
+// const selecionarTodosEndereco = async () => {
 
-    let dadosLogradouro = await educfour_DAO.selectAllrsComplement()
+//     let dadosLogradouro = await educfour_DAO.selectAllrsComplement()
 
-    let dadosJson = {}
+//     let dadosJson = {}
 
-    if (dadosLogradouro) {
-        dadosJson.status = 200
-        dadosJson.bairro = dadosLogradouro
-        return dadosJson
-    }
-    else {
-        return message.ERROR_NOT_FOUND
-    }
-}
+//     if (dadosLogradouro) {
+//         dadosJson.status = 200
+//         dadosJson.bairro = dadosLogradouro
+//         return dadosJson
+//     }
+//     else {
+//         return message.ERROR_NOT_FOUND
+//     }
+// }
 
-const inserirEndereco = async (dadosaddress) =>{
+// const inserirEndereco = async (dadosaddress) =>{
 
-    if(dadosaddress.cep == '' || dadosaddress.cep == undefined || dadosaddress.cep  > 45 ||
-       dadosaddress.logradouro == '' || dadosaddress.logradouro == undefined || dadosaddress.logradouro > 70
-    ){
+//     if(dadosaddress.cep == '' || dadosaddress.cep == undefined || dadosaddress.cep  > 45 ||
+//        dadosaddress.logradouro == '' || dadosaddress.logradouro == undefined || dadosaddress.logradouro > 70
+//     ){
 
-        return message.ERROR_REQUIRED_DATA
+//         return message.ERROR_REQUIRED_DATA
 
-    }else {
-        let status = await educ_DAO.insertComplement(dadosaddress)
+//     }else {
+//         let status = await educ_DAO.insertComplement(dadosaddress)
 
-        return message.CREATED_ITEM
-    }
+//         return message.CREATED_ITEM
+//     }
 
 
-}
+// }
 
-const selecionarTodosProf = async () => {
+// const selecionarTodosProf = async () => {
 
-    let dadosProf = await educ_DAO.selectUserTeacher()
-    let dadosJson = {}
+//     let dadosProf = await educ_DAO.selectUserTeacher()
+//     let dadosJson = {}
 
-    if(dadosProf){
-        dadosJson.status = 200
-        dadosJson.count = dadosProf.length
-        dadosJson.professores = dadosProf
-        return dadosJson
-    }
-    else{
-        dadosJson.status = 404
-    }
+//     if(dadosProf){
+//         dadosJson.status = 200
+//         dadosJson.count = dadosProf.length
+//         dadosJson.professores = dadosProf
+//         return dadosJson
+//     }
+//     else{
+//         dadosJson.status = 404
+//     }
 
-}
+//}
 const selecionarTodosUsuarios = async () => {
 
     let dadosUser = await educ_DAO.selectUser()
@@ -314,57 +314,83 @@ const selecionarTodosUsuarios = async () => {
 
 }
 
-//TELEFONE
+const inserirUser = async function (dadosUser) {
+    if (dadosUser.nome == '' || dadosUser.nome == undefined || dadosUser.nome.length > 90 ||
+    dadosUser.rg == '' || dadosUser.rg == undefined || dadosUser.rg > 45 ||
+    dadosUser.data_nascimento == '' || dadosUser.data_nascimento == undefined ||
+    dadosUser.declaracao_escolaridade == ' ' || dadosUser.declaracao_escolaridade == undefined || dadosUser.declaracao_escolaridade > 100 ||
+    dadosUser.email == ' ' || dadosUser.email == undefined || dadosUser.email > 90 ||
+    dadosUser.area_de_atuacao == ' ' || dadosUser.area_de_atuacao == undefined || dadosUser.area_de_atuacao > 45||
+    dadosUser.horarios_disponiveis == ' '|| dadosUser.horarios_disponiveis == undefined || 
+    dadosUser.motivo_inscricao == ' ' || dadosUser.motivo_inscricao == undefined ||
+    dadosUser.cep == ' ' || dadosUser.cep == undefined || dadosUser.cep > 45 ||
+    dadosUser.logradouro == ' ' || dadosUser.logradouro == undefined || dadosUser.logradouro > 70||
+    dadosUser.bairro == ' '|| dadosUser.bairro == undefined || dadosUser.cep > 45||
+    dadosUser.cidade == ' ' || dadosUser.cidade == undefined || dadosUser.cidade > 45 ||
+    dadosUser.telefone == ' ' || dadosUser.telefone == undefined || dadosUser.telefone > 45
 
-const selecionarTodasTelefones = async () => {
+    ) {
 
-    let dadosTelefone= await educfour_DAO.selectAllrsTell()
-
-    let dadosJson = {}
-
-    if (dadosTelefone) {
-        dadosJson.status = 200
-        dadosJson.telefone = dadosTelefone
-        return dadosJson
+        return message.ERROR_REQUIRED_DATA
     }
     else {
-        return message.ERROR_NOT_FOUND
-    }
-}
-
-const inserirTelefone = async (dadosTell) =>{
-    if(dadosTell.numero == '' || dadosTell.numero == undefined || dadosTell.numero.length> 45
-    ){
-        return message.ERROR_REQUIRED_DATA
-
-    }else {
-        let status = await educ_DAO.insertTell(dadosTell)
+        let status = await educ_DAO.inserirUser(dadosUser)
 
         return message.CREATED_ITEM
     }
 }
+// //TELEFONE
+
+// const selecionarTodasTelefones = async () => {
+
+//     let dadosTelefone= await educfour_DAO.selectAllrsTell()
+
+//     let dadosJson = {}
+
+//     if (dadosTelefone) {
+//         dadosJson.status = 200
+//         dadosJson.telefone = dadosTelefone
+//         return dadosJson
+//     }
+//     else {
+//         return message.ERROR_NOT_FOUND
+//     }
+// }
+
+// const inserirTelefone = async (dadosTell) =>{
+//     if(dadosTell.numero == '' || dadosTell.numero == undefined || dadosTell.numero.length> 45
+//     ){
+//         return message.ERROR_REQUIRED_DATA
+
+//     }else {
+//         let status = await educ_DAO.insertTell(dadosTell)
+
+//         return message.CREATED_ITEM
+//     }
+// }
 
 
 module.exports = {
     selecionarTodasAsNoticias,
     inserirNoticia,
     inserirAdm,
+    inserirUser,
     selecionarTodososAdms,
     deletarAdm,
-    selecionarTodasAsAulas,
+    // selecionarTodasAsAulas,
     deletarNoticia,
     atualizarAdm,
     atualizarNoticias,
-    inserirBairro,
-    selecionarTodososBairro,
-    selecionarTodasCidades,
-    inserirCidade,
-    selecionarTodosProf,
+    // inserirBairro,
+    // selecionarTodososBairro,
+    // selecionarTodasCidades,
+    // inserirCidade,
+    // selecionarTodosProf,
     selecionarTodosUsuarios,
-    inserirEndereco,
-    selecionarTodosEndereco,
-    selecionarTodasTelefones,
-    inserirTelefone
+    // inserirEndereco,
+    // selecionarTodosEndereco,
+    // selecionarTodasTelefones,
+    // inserirTelefone
 
     
 }

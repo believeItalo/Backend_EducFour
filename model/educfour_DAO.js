@@ -128,6 +128,7 @@ const insertNews = async (dadosNews) => {
         return false;
     }
 }
+
 const deleteNews = async function (id) {
     let sql = `delete from tbl_noticias where id = ${id}`;
 
@@ -147,149 +148,170 @@ const deleteNews = async function (id) {
 
 //AULAS
 
-const selectAllCLasses = async () => {
+// const selectAllCLasses = async () => {
 
-    let sql = 'SELECT p.id, p.nome, p.area_de_atuacao, p.horarios, a.comeco_aula, a.termino_aula FROM tbl_professor p INNER JOIN tbl_aulas a ON p.id = a.id_professor;'
-    let rsClasses = await prisma.$queryRawUnsafe(sql)
+//     let sql = 'SELECT p.id, p.nome, p.area_de_atuacao, p.horarios, a.comeco_aula, a.termino_aula FROM tbl_professor p INNER JOIN tbl_aulas a ON p.id = a.id_professor;'
+//     let rsClasses = await prisma.$queryRawUnsafe(sql)
 
-    if (rsClasses.length > 0) {
-        return rsClasses
-    }
-    else {
+//     if (rsClasses.length > 0) {
+//         return rsClasses
+//     }
+//     else {
 
-        return false
-    }
-}
+//         return false
+//     }
+// }
 
 
 //BAIRRO
-const selectAllrsNeighbor = async () => {
+// const selectAllrsNeighbor = async () => {
 
-    let sql = 'select * from tbl_bairro;'
-    let rsNeighbor = await prisma.$queryRawUnsafe(sql)
+//     let sql = 'select * from tbl_bairro;'
+//     let rsNeighbor = await prisma.$queryRawUnsafe(sql)
 
-    if (rsNeighbor.length > 0) {
-        return rsNeighbor
-    }
-    else {
+//     if (rsNeighbor.length > 0) {
+//         return rsNeighbor
+//     }
+//     else {
 
-        return false
-    }
-}
+//         return false
+//     }
+// }
 
-
-
-const insertNeighborhood = async(dadosneighborhood) => {
-    let sql =`insert into tbl_bairro
-    (nome)
-        values
-        ('${dadosneighborhood.nome}'
-          ) `;
-          let rsBor = await prisma.$queryRawUnsafe(sql)
+// const insertNeighborhood = async(dadosneighborhood) => {
+//     let sql =`insert into tbl_bairro
+//     (nome)
+//         values
+//         ('${dadosneighborhood.nome}'
+//           ) `;
+//           let rsBor = await prisma.$queryRawUnsafe(sql)
 
 
-          if(rsBor) {
-              return true;
-          }
-          else{
-             return false;
-          }
-    }
+//           if(rsBor) {
+//               return true;
+//           }
+//           else{
+//              return false;
+//           }
+//     }
 
-//CIDADE
-const selectAllrsCity = async () => {
+// //CIDADE
+// const selectAllrsCity = async () => {
 
-    let sql = 'select * from tbl_cidade;'
-    let rsCity = await prisma.$queryRawUnsafe(sql)
+//     let sql = 'select * from tbl_cidade;'
+//     let rsCity = await prisma.$queryRawUnsafe(sql)
 
-    if (rsCity.length > 0) {
-        return rsCity
-    }
-    else {
+//     if (rsCity.length > 0) {
+//         return rsCity
+//     }
+//     else {
 
-        return false
-    }
-}
-const insertCity = async(dadosCity) => {
-    let sql =`insert into tbl_cidade
-    (nome)
-        values
-        ('${dadosCity.nome}') `;
-          let rsCity = await prisma.$queryRawUnsafe(sql)
+//         return false
+//     }
+// }
+
+// const insertCity = async(dadosCity) => {
+//     let sql =`insert into tbl_cidade
+//     (nome)
+//         values
+//         ('${dadosCity.nome}') `;
+//           let rsCity = await prisma.$queryRawUnsafe(sql)
 
 
-          if(rsCity) {
-              return true;
-          }
-          else{
-             return false;
-          }
-    }
+//           if(rsCity) {
+//               return true;
+//           }
+//           else{
+//              return false;
+//           }
+//     }
 //LOGRADOURA
 
-const selectAllrsComplement = async () => {
+// const selectAllrsComplement = async () => {
 
-    let sql = 'select * from tbl_endereco;'
-    let rsAddress = await prisma.$queryRawUnsafe(sql)
+//     let sql = 'select * from tbl_endereco;'
+//     let rsAddress = await prisma.$queryRawUnsafe(sql)
 
-    if (rsAddress.length > 0) {
-        return rsAddress
-    }
-    else {
+//     if (rsAddress.length > 0) {
+//         return rsAddress
+//     }
+//     else {
 
-        return false
-    }
-}
+//         return false
+//     }
+// }
 
-const insertComplement = async(dadosaddress) => {
+// const insertComplement = async(dadosaddress) => {
    
-    let sql = `insert into tbl_endereco
-    (cep, logradouro)
-        values
-        ('${dadosaddress.cep}',
-        '${dadosaddress.logradouro}'
-          ) `;
-          let rsEnd = await prisma.$queryRawUnsafe(sql)
-          if(rsEnd) {
-              return true;
-          }
-          else{
-             return false;
-          }
-    }
+//     let sql = `insert into tbl_endereco
+//     (cep, logradouro)
+//         values
+//         ('${dadosaddress.cep}',
+//         '${dadosaddress.logradouro}'
+//           ) `;
+//           let rsEnd = await prisma.$queryRawUnsafe(sql)
+//           if(rsEnd) {
+//               return true;
+//           }
+//           else{
+//              return false;
+//           }
+//     }
 
-    const selectUserTeacher = async () => {
+    // const selectUserTeacher = async () => {
 
-        let sql = 'SELECT p.id, p.nome, p.cnpj, p.cpf, p.rg, p.data_nascimento, p.declaracao_escolaridade, p.email, p.area_de_atuacao, e.cep, e.logradouro, t.numero AS telefone FROM tbl_professor p  INNER JOIN tbl_endereco e ON p.id_endereco = e.id INNER JOIN tbl_telefone t ON p.id_telefone = t.id;'
-        let rsTeacher = await prisma.$queryRawUnsafe(sql)
+    //     let sql = 'SELECT p.id, p.nome, p.cnpj, p.cpf, p.rg, p.data_nascimento, p.declaracao_escolaridade, p.email, p.area_de_atuacao, e.cep, e.logradouro, t.numero AS telefone FROM tbl_professor p  INNER JOIN tbl_endereco e ON p.id_endereco = e.id INNER JOIN tbl_telefone t ON p.id_telefone = t.id;'
+    //     let rsTeacher = await prisma.$queryRawUnsafe(sql)
     
-        if (rsTeacher.length > 0) {
-            return rsTeacher
-        }
-        else {
-    
-            return false
-        }
-    }
-    // const insertUser = async(dadosUser) => {
-   
-    //     let sql = `insert into tbl_usuario
-    //     (nome,cnpj,cpf,rg,data_nascimento,declaracao_escolaridade,email,id_endereco,id_telefone,area_de_atuacao,horarios)
-    //     values('${dadosUser.nome}','${dadosUser.cnpj}','${dadosUser.cpf}','${dadosUser.rg}','${dadosUser.data_nascimento}','${dadosUser.declaracao_escolaridade}','${dadosUser.email}',1,2,3,'Gostaria de ajudar trabalhando na limpeza','das 14hrs até as 16hrs');`;
-    //           let rsEnd = await prisma.$queryRawUnsafe(sql)
-    //           if(rsEnd) {
-    //               return true;
-    //           }
-    //           else{
-    //              return false;
-    //           }
+    //     if (rsTeacher.length > 0) {
+    //         return rsTeacher
     //     }
+    //     else {
+    
+    //         return false
+    //     }
+    // }
+
+    const insertUser = async(dadosUser) => {
+        let sql = `insert into tbl_usuario
+        (nome,
+            cnpj,
+            cpf,
+            rg,
+            data_nascimento,
+            declaracao_escolaridade,
+            email,
+            area_de_atuacao,
+            motivo_inscricao,
+            horarios_disponiveis,
+            cep,logradouro,
+            bairro,cidade,
+            telefone)
+        values('${dadosUser.nome}',
+        '${dadosUser.cnpj}',
+        '${dadosUser.cpf}',
+        '${dadosUser.rg}',
+        '${dadosUser.data_nascimento}',
+        '${dadosUser.declaracao_escolaridade}',
+        '${dadosUser.email}',${dadosUser.area_de_atuacao}
+        ,${dadosUser.motivo_inscricao},${dadosUser.horarios_disponiveis},
+        ${dadosUser.cep},
+        ${dadosUser.logradouro},${dadosUser.bairro},
+        ${dadosUser.cidade},${dadosUser.telefone});`;
+              let rsEnd = await prisma.$queryRawUnsafe(sql)
+              if(rsEnd) {
+                  return true;
+              }
+              else{
+                 return false;
+              }
+        }
     
     
 
     const selectUser = async () => {
 
-        let sql = 'SELECT tbl_usuario.nome, tbl_usuario.cnpj, tbl_usuario.cpf, tbl_usuario.rg, tbl_usuario.data_nascimento, tbl_usuario.declaracao_escolaridade, tbl_usuario.email, tbl_usuario.area_de_atuacao, tbl_usuario.horarios, tbl_endereco.cep, tbl_endereco.logradouro, tbl_bairro.nome as nome_bairro, tbl_cidade.nome as nome_cidade FROM tbl_usuario INNER JOIN tbl_endereco ON tbl_endereco.id = tbl_usuario.id_endereco INNER JOIN tbl_bairro ON tbl_bairro.id = tbl_endereco.id INNER JOIN tbl_cidade ON tbl_usuario.id_endereco = tbl_cidade.id;'
+        let sql = 'select * from tbl_usuario;'
         let rsTeacher = await prisma.$queryRawUnsafe(sql)
     
         if (rsTeacher.length > 0) {
@@ -300,35 +322,36 @@ const insertComplement = async(dadosaddress) => {
             return false
         }
     }
+
 //Telefone
-const selectAllrsTell = async () => {
+// const selectAllrsTell = async () => {
 
-    let sql = 'select * from tbl_telefone;'
-    let rsTell = await prisma.$queryRawUnsafe(sql)
+//     let sql = 'select * from tbl_telefone;'
+//     let rsTell = await prisma.$queryRawUnsafe(sql)
 
-    if (rsTell.length > 0) {
-        return rsTell
-    }
-    else {
+//     if (rsTell.length > 0) {
+//         return rsTell
+//     }
+//     else {
 
-        return false
-    }
-}
-const insertTell = async(dadosTell) => {
-    let sql =`insert into tbl_telefone
-    (numero)
-        values
-        ('${dadosTell.numero}') `;
-          let rsTell = await prisma.$queryRawUnsafe(sql)
+//         return false
+//     }
+// }
+// const insertTell = async(dadosTell) => {
+//     let sql =`insert into tbl_telefone
+//     (numero)
+//         values
+//         ('${dadosTell.numero}') `;
+//           let rsTell = await prisma.$queryRawUnsafe(sql)
 
 
-          if(rsTell) {
-              return true;
-          }
-          else{
-             return false;
-          }
-    }
+//           if(rsTell) {
+//               return true;
+//           }
+//           else{
+//              return false;
+//           }
+//     }
 
 
 
@@ -338,18 +361,19 @@ module.exports = {
     insertNews,
     insertAdm,
     deleteADM,
-    selectAllCLasses,
+    // selectAllCLasses,
     deleteNews,
     updateAdm,
     updateNews,
-    insertNeighborhood,
-    selectAllrsNeighbor,
-    insertCity,
-    selectAllrsCity,
-    selectUserTeacher,
+    // insertNeighborhood,
+    // selectAllrsNeighbor,
+    // insertCity,
+    // selectAllrsCity,
+    // selectUserTeacher,
     selectUser,
-    selectAllrsComplement,
-    insertComplement,
-    selectAllrsTell,
-    insertTell
+    insertUser
+    // selectAllrsComplement,
+    // insertComplement,
+    // selectAllrsTell,
+    // insertTell
 }
