@@ -272,41 +272,39 @@ const deleteNews = async function (id) {
     //     }
     // }
 
-    const insertUser = async(dadosUser) => {
-        let sql = `insert into tbl_usuario
-        (nome,
-            cnpj,
-            cpf,
-            rg,
-            data_nascimento,
-            declaracao_escolaridade,
-            email,
-            area_de_atuacao,
-            motivo_inscricao,
-            horarios_disponiveis,
-            cep,logradouro,
-            bairro,cidade,
-            telefone)
-        values('${dadosUser.nome}',
-        '${dadosUser.cnpj}',
-        '${dadosUser.cpf}',
-        '${dadosUser.rg}',
-        '${dadosUser.data_nascimento}',
-        '${dadosUser.declaracao_escolaridade}',
-        '${dadosUser.email}',${dadosUser.area_de_atuacao},${dadosUser.horarios_disponiveis},
-        ,${dadosUser.motivo_inscricao}
-        ${dadosUser.cep},
-        ${dadosUser.logradouro},${dadosUser.bairro},
-        ${dadosUser.cidade},${dadosUser.telefone});`;
-              let rsEnd = await prisma.$queryRawUnsafe(sql)
-              if(rsEnd) {
-                  return true;
-              }
-              else{
-                 return false;
-              }
+    const insertUser = async (dadosUser) => {
+        let sql = `INSERT INTO tbl_usuario
+          (nome, cnpj, cpf, rg, data_nascimento, declaracao_escolaridade, email, area_de_atuacao, motivo_inscricao, horarios_disponiveis, cep, logradouro, bairro, cidade, telefone)
+          VALUES (
+            '${dadosUser.nome}',
+            '${dadosUser.cnpj}',
+            '${dadosUser.cpf}',
+            '${dadosUser.rg}',
+            '${dadosUser.data_nascimento}',
+            '${dadosUser.declaracao_escolaridade}',
+            '${dadosUser.email}',
+            '${dadosUser.area_de_atuacao}',
+            '${dadosUser.motivo_inscricao}',
+            '${dadosUser.horarios_disponiveis}',
+            '${dadosUser.cep}',
+            '${dadosUser.logradouro}',
+            '${dadosUser.bairro}',
+            '${dadosUser.cidade}',
+            '${dadosUser.telefone}'
+          );`;
+      
+        let rsEnd = await prisma.$queryRawUnsafe(sql);
+        if (rsEnd) {
+          return true;
+        } else {
+          return false;
         }
-    
+      };
+      
+module.exports = {
+  insertUser: insertUser,
+};
+
     
 
     const selectUser = async () => {

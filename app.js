@@ -117,7 +117,7 @@ app.get('/v1/educ_four/users/get', cors(), async function (request,response){
    response.json(dados)
 
 });
-app.post('/v1/educ_four/users/post', cors(), bodyJson, async function (request,response){
+app.post('/v1/educ_four/post/user', cors(), bodyJson, async function (request,response){
    let contentType = request.headers['content-type'];
    if(String(contentType).toLowerCase() == 'application/json'){
 

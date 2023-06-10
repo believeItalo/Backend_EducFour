@@ -315,40 +315,65 @@ const selecionarTodosUsuarios = async () => {
 }
 
 const inserirUser = async function (dadosUser) {
-    if (dadosUser.nome == '' || dadosUser.nome == undefined || dadosUser.nome.length > 90 ||
-    dadosUser.cpf == ''|| dadosUser.cpf == undefined || dadosUser.cnpj == ' ' || dadosUser.cnpj == undefined ||
-    dadosUser.rg == '' || dadosUser.rg == undefined || dadosUser.rg > 45 ||
-    dadosUser.data_nascimento == '' || dadosUser.data_nascimento == undefined ||
-    dadosUser.declaracao_escolaridade == ' ' || dadosUser.declaracao_escolaridade == undefined || dadosUser.declaracao_escolaridade > 100 ||
-    dadosUser.email == ' ' || dadosUser.email == undefined || dadosUser.email > 90 ||
-    dadosUser.area_de_atuacao == ' ' || dadosUser.area_de_atuacao == undefined || dadosUser.area_de_atuacao > 45||
-    dadosUser.horarios_disponiveis == ' '|| dadosUser.horarios_disponiveis == undefined || 
-    dadosUser.motivo_inscricao == ' ' || dadosUser.motivo_inscricao == undefined ||
-    dadosUser.cep == ' ' || dadosUser.cep == undefined || dadosUser.cep > 45 ||
-    dadosUser.logradouro == ' ' || dadosUser.logradouro == undefined || dadosUser.logradouro > 70||
-    dadosUser.bairro == ' '|| dadosUser.bairro == undefined || dadosUser.cep > 45||
-    dadosUser.cidade == ' ' || dadosUser.cidade == undefined || dadosUser.cidade > 45 ||
-    dadosUser.telefone == ' ' || dadosUser.telefone == undefined || dadosUser.telefone > 45
-
+    if (
+      dadosUser.nome === '' ||
+      dadosUser.nome === undefined ||
+      dadosUser.nome.length > 90 ||
+      dadosUser.cpf === '' ||
+      dadosUser.cpf === undefined ||
+      dadosUser.cnpj === '' ||
+      dadosUser.cnpj === undefined ||
+      dadosUser.rg === '' ||
+      dadosUser.rg === undefined ||
+      dadosUser.rg.length > 45 ||
+      dadosUser.data_nascimento === '' ||
+      dadosUser.data_nascimento === undefined ||
+      dadosUser.declaracao_escolaridade === '' ||
+      dadosUser.declaracao_escolaridade === undefined ||
+      dadosUser.declaracao_escolaridade.length > 100 ||
+      dadosUser.email === '' ||
+      dadosUser.email === undefined ||
+      dadosUser.email.length > 90 ||
+      dadosUser.area_de_atuacao === '' ||
+      dadosUser.area_de_atuacao === undefined ||
+      dadosUser.area_de_atuacao.length > 45 ||
+      dadosUser.horarios_disponiveis === '' ||
+      dadosUser.horarios_disponiveis === undefined ||
+      dadosUser.motivo_inscricao === '' ||
+      dadosUser.motivo_inscricao === undefined ||
+      dadosUser.cep === '' ||
+      dadosUser.cep === undefined ||
+      dadosUser.cep.length > 45 ||
+      dadosUser.logradouro === '' ||
+      dadosUser.logradouro === undefined ||
+      dadosUser.logradouro.length > 70 ||
+      dadosUser.bairro === '' ||
+      dadosUser.bairro === undefined ||
+      dadosUser.bairro.length > 45 ||
+      dadosUser.cidade === '' ||
+      dadosUser.cidade === undefined ||
+      dadosUser.cidade.length > 45 ||
+      dadosUser.telefone === '' ||
+      dadosUser.telefone === undefined ||
+      dadosUser.telefone.length > 45
     ) {
-        return message.ERROR_REQUIRED_DATA
+      return message.ERROR_REQUIRED_DATA;
+    } else {
+      let status = await educ_DAO.insertUser(dadosUser);
+  
+      if (status) {
+        let dadosJson = {};
+  
+        dadosJson.status = message.UPDATED_ITEM.status;
+        dadosJson.new = dadosUser;
+  
+        return dadosJson;
+      } else {
+        return message.ERROR_INTERNAL_SERVER;
+      }
     }
-    else {
-    let status = await educ_DAO.insertUser(dadosUser)
-
-    if(status){
-        let dadosJson = {} 
-
-        dadosJson.status = message.UPDATED_ITEM.status
-        dadosJson.new = dadosUser
-
-        return dadosJson
-    }
-    else
-        return message.ERROR_INTERNAL_SERVER
-}
-    
-}
+  };
+  
 // //TELEFONE
 
 // const selecionarTodasTelefones = async () => {
